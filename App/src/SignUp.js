@@ -134,9 +134,9 @@ const SignupPage = () => {
                     required
                   >
                     <option value="">Select a course</option>
-                    <option value="Math">Math</option>
-                    <option value="Science">Science</option>
-                    <option value="History">History</option>
+                    <option value="Math">Data Structures and Algorithms</option>
+                    <option value="Science">Computer Networks</option>
+                    <option value="History">Operating system</option>
                   </select>
                   <BookOpen className="absolute left-3 top-2.5 text-gray-500" size={20} />
                 </div>
