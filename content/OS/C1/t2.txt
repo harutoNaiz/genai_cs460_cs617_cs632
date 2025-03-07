@@ -1,0 +1,4 @@
+Threads & Concurrency
+A thread is a lightweight process.
+Multithreading allows multiple threads to run concurrently in a process.
+Concurrency issues include race conditions and deadlocks.
