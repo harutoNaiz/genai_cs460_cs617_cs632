@@ -45,7 +45,7 @@ const LoginPage = () => {
                 transition={{ duration: 0.5 }}
                 className="bg-white bg-opacity-20 p-8 rounded-lg shadow-lg w-full max-w-md"
             >
-                <h2 className="text-3xl font-bold mb-6 text-center">Login to AgentX</h2>
+                <h2 className="text-3xl font-bold mb-6 text-center">Login to LearnAI</h2>
                 <form onSubmit={handleLogin} className="space-y-4">
                     <div>
                         <label htmlFor="email" className="block mb-1">Email</label>

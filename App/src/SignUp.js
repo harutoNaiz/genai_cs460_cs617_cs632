@@ -65,7 +65,7 @@ const SignupPage = () => {
       >
         {step === 1 ? (
           <>
-            <h2 className="text-3xl font-bold mb-6 text-center">Join AgentX</h2>
+            <h2 className="text-3xl font-bold mb-6 text-center">Join LearnAI</h2>
             <form onSubmit={handleSignup} className="space-y-4">
               <div>
                 <label htmlFor="name" className="block mb-1">Full Name</label>
