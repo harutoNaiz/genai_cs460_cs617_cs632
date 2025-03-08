@@ -13,8 +13,9 @@ const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('userEmail');
-    navigate('/login');
-  };
+    navigate('/login', { replace: true }); // Prevents going back to the previous page
+    window.location.reload(); // Ensures the login page reloads to clear previous session state
+};
 
   const handleProfilePage = () => {
     navigate('/profile');
