@@ -1,0 +1,3 @@
+Stacks & Queues
+A stack follows LIFO (Last In, First Out) order, used in function calls and undo operations.
+A queue follows FIFO (First In, First Out) order, used in scheduling processes.
