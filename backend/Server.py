@@ -12,6 +12,12 @@ cred = credentials.Certificate("Credentials.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
+# Function to extract numeric prefix and sort by it
+import re
+def extract_number(name):
+    match = re.match(r"(\d+)_", name)
+    return int(match.group(1)) if match else float('inf')  # Assign large number if no match
+
 @app.route('/signup', methods=['POST'])
 def signup():
     data = request.json
@@ -103,17 +109,25 @@ def get_chapters():
 
         # 3. Gather chapters and topics
         chapters = []
-        for chapter_name in os.listdir(content_path):
+        for chapter_name in sorted(os.listdir(content_path), key=extract_number):
             chapter_path = os.path.join(content_path, chapter_name)
             if os.path.isdir(chapter_path):
-                topics = []
-                for file_name in os.listdir(chapter_path):
-                    file_path = os.path.join(chapter_path, file_name)
-                    if os.path.isfile(file_path):
-                        topics.append(file_name)
+                topics = sorted(
+                    [file for file in os.listdir(chapter_path) if os.path.isfile(os.path.join(chapter_path, file))],
+                    key=extract_number
+                )
+                # for file_name in os.listdir(chapter_path):
+                #     file_path = os.path.join(chapter_path, file_name)
+                #     if os.path.isfile(file_path):
+                #         topics.append(file_name)
+
+                # Strip numeric prefix from chapter and topics
+                stripped_chapter_name = re.sub(r"^\d+_", "", chapter_name)
+                stripped_topics = [re.sub(r"^\d+_", "", topic) for topic in topics]
+
                 chapters.append({
-                    "chapterName": chapter_name,
-                    "topics": topics
+                    "chapterName": stripped_chapter_name,
+                    "topics": stripped_topics
                 })
 
         return jsonify({"chapters": chapters}), 200
