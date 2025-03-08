@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 import os
 from utils import extract_number, get_stripped_name
 from config import get_db
+import google.generativeai as genai
 
 content_bp = Blueprint('content', __name__)
 db = get_db()
@@ -34,7 +35,7 @@ def get_chapters():
         # 3. Build the path to the content/<course> directory
         # Fix the path resolution to correctly find the content directory
         current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        content_path = os.path.join(current_dir, '..', 'content', course)
+        content_path = os.path.join(current_dir, '..', 'content/sort', course)
         
         print(f"Looking for content at: {content_path}")  # Debugging
 

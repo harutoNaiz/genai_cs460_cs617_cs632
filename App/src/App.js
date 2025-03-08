@@ -4,6 +4,7 @@ import WelcomePage from './WelcomePage';
 import LoginPage from './Login';
 import SignupPage from './SignUp';
 import ChaptersPage from './chapters';
+import TopicPage from './TopicPage';
 import './index.css';
 
 const App = () => {
@@ -14,7 +15,8 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/chapters" element={<ChaptersPage />} />
-        </Routes>
+        <Route path="/chapters/:chapterName/:topic" element={<TopicPage />} />
+      </Routes>
     </Router>
   );
 };
