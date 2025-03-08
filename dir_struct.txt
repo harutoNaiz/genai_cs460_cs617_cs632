@@ -1,0 +1,53 @@
+.
+├── App
+│   ├── build
+│   │   ├── asset-manifest.json
+│   │   ├── index.html
+│   │   └── static
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── postcss.config.js
+│   ├── public
+│   │   └── index.html
+│   ├── src
+│   │   ├── App.css
+│   │   ├── App.js
+│   │   ├── App.test.js
+│   │   ├── chapters.js
+│   │   ├── Header.js
+│   │   ├── index.css
+│   │   ├── index.js
+│   │   ├── Login.js
+│   │   ├── reportWebVitals.js
+│   │   ├── SignUp.js
+│   │   └── WelcomePage.js
+│   └── tailwind.config.js
+├── backend
+│   ├── config.py
+│   ├── Credentials.json
+│   ├── __pycache__
+│   │   ├── config.cpython-310.pyc
+│   │   └── utils.cpython-310.pyc
+│   ├── routes
+│   │   ├── auth.py
+│   │   ├── content.py
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   └── user.py
+│   ├── Server.py
+│   ├── temp.py
+│   └── utils.py
+└── content
+    ├── Computer Networks
+    │   ├── 1_Fundamentals of Computer Networks
+    │   ├── 2_Network Protocols and Communication
+    │   └── 3_Network Security and Advanced Concepts
+    ├── Data Structures and Algorithms
+    │   ├── 1_Foundations of Data Structures
+    │   ├── 2_Core Algorithms for Problem Solving
+    │   └── 3_Advanced Data Structures
+    └── Operating system
+        ├── 1_Fundamentals of Operating Systems
+        ├── 2_Resource Management and Synchronization
+        └── 3_Advanced Concepts and Security in OS
+
