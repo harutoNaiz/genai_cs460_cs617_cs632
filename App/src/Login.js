@@ -14,29 +14,24 @@ const LoginPage = () => {
         try {
             const response = await fetch('http://localhost:5000/login', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password }),
             });
     
             const result = await response.json();
             if (response.ok && result.success) {
-                // Store the user's details in local storage
-                // localStorage.setItem('user', JSON.stringify(result.user));
                 localStorage.setItem("userEmail", result.user.email);
+                localStorage.setItem("userName", result.user.name); // Store name too
     
-                // Redirect to dashboard page upon successful login
                 navigate('/chapters');
             } else {
-                setError(result.message || 'An error occurred while logging in.');
+                setError(result.message || 'Invalid email or password.');
             }
         } catch (error) {
             setError('An error occurred while logging in.');
         }
     };
     
-
     return (
         <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-500 text-white flex flex-col justify-center items-center p-4">
             <motion.div
