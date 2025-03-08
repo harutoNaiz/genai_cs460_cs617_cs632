@@ -133,10 +133,10 @@ const SignupPage = () => {
                     className="w-full px-3 py-2 bg-white bg-opacity-50 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-300 pl-10"
                     required
                   >
-                    <option value="">Select a course</option>
-                    <option value="Math">Data Structures and Algorithms</option>
-                    <option value="Science">Computer Networks</option>
-                    <option value="History">Operating system</option>
+                    <option value="" disabled selected hidden>Select a course</option>
+                    <option value="DSA">Data Structures and Algorithms</option>
+                    <option value="CN">Computer Networks</option>
+                    <option value="OS">Operating system</option>
                   </select>
                   <BookOpen className="absolute left-3 top-2.5 text-gray-500" size={20} />
                 </div>
