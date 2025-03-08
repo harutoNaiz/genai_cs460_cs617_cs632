@@ -9,7 +9,7 @@ const Header = () => {
     
     const userEmail = localStorage.getItem('userEmail');
     const userName = localStorage.getItem('userName');
-
+    const userCourse = localStorage.getItem('userCourse'); // Retrieve course
 
     const toggleDropdown = () => {
         setDropdownOpen((prev) => !prev);
@@ -40,15 +40,22 @@ const Header = () => {
     }, []);
 
     return (
-        <div className="flex justify-end items-center relative">
+        <div className="flex justify-between items-center p-4 bg-purple-600 text-white">
+            {/* Display Course on the Left - Bigger Text */}
+            <div className="text-2xl font-bold ml-4">
+                {userCourse ? `Course: ${userCourse}` : "Course: Not Set"}
+            </div>
 
-            {/* User Icon */}
-            <div ref={dropdownRef} className="relative">
+            {/* User Info & Dropdown on the Right */}
+            <div ref={dropdownRef} className="relative flex items-center mr-4">
+                {/* Display User Name Next to Icon */}
+                {userName && <span className="mr-2 text-lg">{userName}</span>}
+
+                {/* User Icon */}
                 <div className="cursor-pointer" onClick={toggleDropdown}>
                     <User size={40} className="text-white" />
                 </div>
 
-                {/* Dropdown Menu */}
                 {dropdownOpen && (
                     <div className="absolute right-0 mt-2 w-48 bg-white text-purple-600 rounded shadow-lg z-10">
                         <div className="px-4 py-2 hover:bg-gray-200 cursor-pointer" onClick={handleProfilePage}>

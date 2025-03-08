@@ -55,6 +55,7 @@ def login():
         if not check_password_hash(user_data['password'], password):
             return jsonify({"success": False, "message": "Invalid email or password"}), 401
 
-        return jsonify({"success": True, "user": {"name": user_data["name"], "email": user_data["email"]}}), 200
+        return jsonify({"success": True, "user": {"name": user_data["name"], "email": user_data["email"], "course": user_data["course"]}}), 200
+    
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500

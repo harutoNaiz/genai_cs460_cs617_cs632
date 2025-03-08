@@ -17,12 +17,14 @@ const LoginPage = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password }),
             });
-    
+            
             const result = await response.json();
+            console.log(result)
             if (response.ok && result.success) {
                 localStorage.setItem("userEmail", result.user.email);
                 localStorage.setItem("userName", result.user.name); // Store name too
-    
+                localStorage.setItem("userCourse", result.user.course || "Not Set");                
+
                 navigate('/chapters');
             } else {
                 setError(result.message || 'Invalid email or password.');
