@@ -2,12 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ChevronDown, ChevronUp, User } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
+import Header from './Header'; // Adjust the path as necessary
 
 const ChaptersPage = () => {
   const navigate = useNavigate();
   
-  // We assume the user's email is stored in localStorage after login.
+  // Assume the user's email is stored in localStorage after login.
   const userEmail = localStorage.getItem('userEmail');
   
   // Data structure for chapters
@@ -40,12 +41,12 @@ const ChaptersPage = () => {
 
   const handleTopicClick = (chapterName, topic) => {
     // Navigate to a topic page (to be implemented).
-    // For example, /topic/Science/Chapter1/topic1.txt
     navigate(`/topic/${chapterName}/${topic}`);
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 text-white p-6">
+      {/* Using the separated Header component */}
       <Header />
       <div className="mt-16">
         <h2 className="text-4xl font-bold mb-8 text-center">
@@ -88,50 +89,6 @@ const ChaptersPage = () => {
           )}
         </div>
       </div>
-    </div>
-  );
-};
-
-const Header = () => {
-  const navigate = useNavigate();
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  const handleProfileClick = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
-
-  const handleLogout = () => {
-    // Clear user session data
-    localStorage.removeItem('userEmail');
-    navigate('/login');
-  };
-
-  const handleProfilePage = () => {
-    // Navigate to the profile page (to be implemented)
-    navigate('/profile');
-  };
-
-  return (
-    <div className="flex justify-end items-center relative">
-      <div className="cursor-pointer" onClick={handleProfileClick}>
-        <User size={40} className="text-white" />
-      </div>
-      {dropdownOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-white text-purple-600 rounded shadow-lg z-10">
-          <div
-            className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
-            onClick={handleProfilePage}
-          >
-            Profile
-          </div>
-          <div
-            className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
-            onClick={handleLogout}
-          >
-            Logout
-          </div>
-        </div>
-      )}
     </div>
   );
 };
