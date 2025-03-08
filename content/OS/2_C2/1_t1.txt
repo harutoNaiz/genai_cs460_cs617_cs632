@@ -1,5 +1,0 @@
-Process Scheduling (FCFS, SJF, RR)
-Process scheduling decides the execution order of processes:
-- FCFS (First Come, First Serve): Executes processes in arrival order.
-- SJF (Shortest Job First): Executes shortest tasks first.
-- Round Robin (RR): Gives each process a fixed time slot in a cyclic order.

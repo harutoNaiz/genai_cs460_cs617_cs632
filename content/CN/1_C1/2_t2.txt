@@ -1,5 +1,0 @@
-Network Topologies
-Network topologies define how devices are interconnected. Common types include:
-- Bus: Single backbone cable; if it fails, the network goes down.
-- Star: Central switch connects all devices.
-- Mesh: Each device connects to all others for redundancy.

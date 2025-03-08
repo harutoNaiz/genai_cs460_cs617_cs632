@@ -1,4 +1,0 @@
-Arrays & Linked Lists
-An array stores elements in contiguous memory locations and provides O(1) access time.
-A linked list consists of nodes, each containing data and a pointer to the next node.
-Arrays have fixed sizes, while linked lists allow dynamic memory allocation.

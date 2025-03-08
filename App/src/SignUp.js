@@ -134,9 +134,9 @@ const SignupPage = () => {
                     required
                   >
                     <option value="" disabled selected hidden>Select a course</option>
-                    <option value="DSA">Data Structures and Algorithms</option>
-                    <option value="CN">Computer Networks</option>
-                    <option value="OS">Operating system</option>
+                    <option value="Data Structures and Algorithms">Data Structures and Algorithms</option>
+                    <option value="Computer Networks">Computer Networks</option>
+                    <option value="Operating system">Operating system</option>
                   </select>
                   <BookOpen className="absolute left-3 top-2.5 text-gray-500" size={20} />
                 </div>
