@@ -70,5 +70,60 @@ def login():
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500
 
+@app.route('/get-chapters', methods=['POST'])
+def get_chapters():
+    data = request.json
+    email = data.get('email')
+    email = email.strip()
+    if not email:
+        return jsonify({"error": "Missing email"}), 400
+
+    # 1. Find the user in Firestore to get the 'course'
+    try:
+         # 1. Query Firestore to find the user by email
+        users_ref = db.collection('users')
+        query = users_ref.where('email', '==', email).get()
+
+        # 2. Check if we got a document back
+        if query:
+            user_doc = query[0].to_dict()
+            course = user_doc.get('course')
+            print(course)
+            if not course:
+                return jsonify({"error": "No course found for user"}), 404
+        else:
+            return jsonify({"error": "User not found"}), 404
+
+        # 2. Build the path to the content/<course> directory
+        #    This assumes 'content' is a sibling directory to 'backend'.
+        content_path = os.path.join(os.path.dirname(__file__), '..', 'content', course)
+
+        if not os.path.exists(content_path):
+            return jsonify({"error": f"Course directory '{course}' does not exist"}), 404
+
+        # 3. Gather chapters and topics
+        chapters = []
+        for chapter_name in os.listdir(content_path):
+            chapter_path = os.path.join(content_path, chapter_name)
+            if os.path.isdir(chapter_path):
+                topics = []
+                for file_name in os.listdir(chapter_path):
+                    file_path = os.path.join(chapter_path, file_name)
+                    if os.path.isfile(file_path):
+                        topics.append(file_name)
+                chapters.append({
+                    "chapterName": chapter_name,
+                    "topics": topics
+                })
+
+        return jsonify({"chapters": chapters}), 200
+
+    except StopIteration:
+        return jsonify({"error": "User not found"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)

@@ -23,7 +23,8 @@ const LoginPage = () => {
             const result = await response.json();
             if (response.ok && result.success) {
                 // Store the user's details in local storage
-                localStorage.setItem('user', JSON.stringify(result.user));
+                // localStorage.setItem('user', JSON.stringify(result.user));
+                localStorage.setItem("userEmail", result.user.email);
     
                 // Redirect to dashboard page upon successful login
                 navigate('/chapters');
