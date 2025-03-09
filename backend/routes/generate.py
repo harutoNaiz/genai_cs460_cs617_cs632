@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 import os
 from utils import extract_number, get_stripped_name
 from config import get_db
-import google.generativeai as genai
+import subprocess
 
 generate_bp = Blueprint('generate', __name__)
 db = get_db()
@@ -48,13 +48,7 @@ def get_topic_content():
             topic_content = topic_content[0:100]
 
         # 4. Use Gemini API to generate enhanced explanation
-        GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-        def setup_gemini():
-            genai.configure(api_key=GEMINI_API_KEY)
-            return genai.GenerativeModel('gemini-1.5-pro')
-            
-        model = setup_gemini()
-        
+        model_name = "deepseek-r1:1.5b"  # Ensure you have this model in Ollama
         prompt = f"""
         You are an expert educational assistant. Given the following topic from a {course} course, 
         provide a detailed, clear, and engaging explanation for students.
@@ -73,10 +67,17 @@ def get_topic_content():
         
         Make the explanation educational, engaging, and easy to understand for students.
         """
+
+        # Run Ollama command using subprocess
+        command = ["ollama", "run", model_name, prompt]
+        result = subprocess.run(command, capture_output=True, text=True)
+
+        if result.returncode != 0:
+            return jsonify({"error": "Ollama failed to generate content", "details": result.stderr}), 500
         
-        response = model.generate_content(prompt)
-        enhanced_content = response.text
-            
+        enhanced_content = result.stdout.strip()
+        print(enhanced_content)
+
         return jsonify({
             "topicContent": topic_content,
             "enhancedContent": enhanced_content,
