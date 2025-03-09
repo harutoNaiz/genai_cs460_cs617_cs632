@@ -45,7 +45,7 @@ def get_topic_content():
         
         with open(topic_path, 'r', encoding='utf-8') as file:
             topic_content = file.read()
-            topic_content = topic_content[0:100]
+            # topic_content = topic_content[0:100]
 
         # 4. Use Gemini API to generate enhanced explanation
         model_name = "deepseek-r1:1.5b"  # Ensure you have this model in Ollama
@@ -62,25 +62,24 @@ def get_topic_content():
         1. A clear introduction to the topic
         2. Thorough explanation of key concepts
         3. Examples and applications where relevant
-        4. Diagrams or illustrations (described in text)
-        5. A summary of the main points
+        4. Diagrams or illustrations
         
         Make the explanation educational, engaging, and easy to understand for students.
         """
 
         # Run Ollama command using subprocess
         command = ["ollama", "run", model_name, prompt]
-        result = subprocess.run(command, capture_output=True, text=True)
+        # result = subprocess.run(command, capture_output=True, text=True)
 
-        if result.returncode != 0:
-            return jsonify({"error": "Ollama failed to generate content", "details": result.stderr}), 500
+        # if result.returncode != 0:
+        #     return jsonify({"error": "Ollama failed to generate content", "details": result.stderr}), 500
         
-        enhanced_content = result.stdout.strip()
-        print(enhanced_content)
+        # enhanced_content = result.stdout.strip()
+        # print(enhanced_content)
 
         return jsonify({
             "topicContent": topic_content,
-            "enhancedContent": enhanced_content,
+            "enhancedContent": topic_content,
             "courseTitle": course,
             "chapterTitle": chapter_name,
             "topicTitle": topic_name

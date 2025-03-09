@@ -53,6 +53,9 @@ const TopicPage = () => {
       });
   }, [userEmail, chapterName, topic, navigate]);
 
+  //remove the .txt from the topic name
+  var strippedTopic = topicData.topicTitle.replace('.txt','');
+
   const renderContent = (content) => {
     // Split content by newlines and map to paragraphs
     return content.split('\n\n').map((paragraph, index) => {
@@ -139,7 +142,7 @@ const TopicPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 text-white p-6">
       <Header />
-      <div className="mt-16 max-w-3xl mx-auto">
+      <div className="mt-16 max-w-7xl mx-auto px-10">
         <motion.button
           whileHover={{ scale: 1.05 }}
           className="mb-6 flex items-center px-4 py-2 bg-white bg-opacity-20 rounded-lg"
@@ -156,7 +159,7 @@ const TopicPage = () => {
           <div className="flex items-center">
             <div className="text-lg opacity-90">{topicData.chapterTitle}</div>
             <div className="mx-2">›</div>
-            <div className="text-xl font-bold">{topicData.topicTitle}</div>
+            <div className="text-xl font-bold">{strippedTopic}</div>
           </div>
         </div>
 
@@ -166,21 +169,8 @@ const TopicPage = () => {
           transition={{ duration: 0.5 }}
           className="bg-white bg-opacity-10 rounded-lg p-6 mb-8"
         >
-          <h2 className="text-2xl font-bold mb-4">Enhanced Explanation</h2>
           <div className="prose prose-invert max-w-none">
             {topicData.enhancedContent ? renderContent(topicData.enhancedContent) : <p>No enhanced content available.</p>}
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="bg-white bg-opacity-10 rounded-lg p-6"
-        >
-          <h2 className="text-2xl font-bold mb-4">Original Content</h2>
-          <div className="prose prose-invert max-w-none">
-            {topicData.topicContent ? renderContent(topicData.topicContent) : <p>No topic content available.</p>}
           </div>
         </motion.div>
       </div>

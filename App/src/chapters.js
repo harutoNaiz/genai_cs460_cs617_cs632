@@ -40,10 +40,7 @@ const ChaptersPage = () => {
       .then((data) => {
         if (data.chapters) {
           setChaptersData(data.chapters);
-          // If we have chapters, expand the first one by default
-          if (data.chapters.length > 0) {
-            setExpandedChapter(0);
-          }
+          setExpandedChapter(null);
         } else {
           throw new Error(data.error || 'Unknown error');
         }
