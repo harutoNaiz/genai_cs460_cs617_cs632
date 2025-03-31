@@ -13,7 +13,6 @@ def signup():
     email = data.get('email')
     password = data.get('password')
     rank = 1
-    score = 0
 
     if not all([name, email, password]):
         return jsonify({"error": "Missing required fields"}), 400
@@ -31,7 +30,39 @@ def signup():
             'email': email,
             'password': hashed_password,
             'rank': rank,
-            'score' : score,
+            'performance_data' : 
+                {   
+                    "1":{
+                            "chapter_number" : 1,
+                            "score": 0,
+                            "strong_topics":[],
+                            "weak_topics":[]
+                    },
+                    "2":{
+                            "chapter_number" : 2,
+                            "score": 0,
+                            "strong_topics":[],
+                            "weak_topics":[]
+                    },
+                    "3":{
+                            "chapter_number" : 3,
+                            "score": 0,
+                            "strong_topics":[],
+                            "weak_topics":[]
+                    },
+                    "4":{
+                            "chapter_number" : 4,
+                            "score": 0,
+                            "strong_topics":[],
+                            "weak_topics":[]
+                    },
+                    "5":{
+                            "chapter_number" : 5,
+                            "score": 0,
+                            "strong_topics":[],
+                            "weak_topics":[]
+                    }
+                },
             'createdAt': firestore.SERVER_TIMESTAMP
         })
 

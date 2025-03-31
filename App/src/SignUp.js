@@ -175,7 +175,7 @@ const SignupPage = () => {
         whileTap={{ scale: 0.95 }}
         className="mt-8 text-white flex items-center"
         onClick={() => {
-          navigate('/');
+          navigate('/login');
         }}
       >
         <ArrowLeft className="mr-2" />
