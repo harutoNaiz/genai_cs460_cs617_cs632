@@ -3,9 +3,44 @@ import os
 from utils import extract_number, get_stripped_name
 from config import get_db
 from groq import Groq
+import pandas as pd
+import re
+import time
 
 temp_start_bp = Blueprint('temp_start_bp', __name__)
+csv_generation_bp = Blueprint('csv_generation_bp', __name__)
 db = get_db()
+
+def preprocess_questions(file_path, output_csv):
+    with open(file_path, 'r', encoding='utf-8') as f:
+        content = f.read()
+    
+    # Splitting the questions based on the pattern **Question X**
+    questions = re.split(r'\*\*Question \d+\*\*', content)[1:]
+    
+    data = []
+    
+    for q in questions:
+        lines = q.strip().split('\n')
+        
+        question_text = lines[0].strip()
+        options = [line.strip() for line in lines[1:5]]
+        correct_option_match = re.search(r'\*\*Correct answer: (.*?)\*\*', q)
+        subtopic_match = re.search(r'\*\*Subtopic: (.*?)\*\*', q)
+        subtopic_detail_match = re.search(r'\*\*What in that subtopic exactly: (.*?)\*\*', q)
+        difficulty_match = re.search(r'\*\*Difficulty: (.*?)\*\*', q)
+        
+        correct_option = correct_option_match.group(1) if correct_option_match else ''
+        subtopic = subtopic_match.group(1) if subtopic_match else ''
+        subtopic_detail = subtopic_detail_match.group(1) if subtopic_detail_match else ''
+        difficulty = difficulty_match.group(1) if difficulty_match else ''
+        
+        data.append([question_text] + options + [correct_option, subtopic, subtopic_detail, difficulty])
+    
+    df = pd.DataFrame(data, columns=['Question', 'Option A', 'Option B', 'Option C', 'Option D', 'Correct Option', 'Subtopic', 'Subtopic Detail', 'Difficulty'])
+    
+    df.to_csv(output_csv, index=False, encoding='utf-8')
+    return df
 
 def generate_questions(topic, subtopic, model="llama3-70b-8192"):
     prompt = (f"Generate 5 multiple choice questions on {topic} under {subtopic}. "
@@ -94,14 +129,57 @@ def start_test():
                     questions = generate_questions(chapter_name, topic_name)
                     questions_text += questions + "\n"
 
-        output_file1 = os.path.join(current_dir, "generated_tests")
-        # output_file = os.path.join(output_file1, "generated_test_{chapter_}.txt")
-        output_file = os.path.join(output_file1, f"generated_test_{chapter_}.txt")
+        # Make sure the output directory exists
+        output_dir = os.path.join(current_dir, "generated_tests")
+        os.makedirs(output_dir, exist_ok=True)
+        
+        # Save the questions to a file with absolute path
+        output_file = os.path.join(output_dir, f"generated_test_{chapter_}.txt")
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(questions_text)
+        
+        return jsonify({
+            "success": True, 
+            "message": "Test questions generated successfully", 
+            "file": output_file, 
+            "rank": rank,
+            "chapter": chapter_
+        }), 200
 
-        return jsonify({"success": True, "message": "OK", "file": output_file, "rank": rank}), 200
+    except Exception as e:
+        import traceback
+        print(traceback.format_exc())
+        return jsonify({"error": str(e)}), 500
 
+@csv_generation_bp.route('/generate_csv', methods=['POST'])
+def generate_csv():
+    data = request.json
+    chapter_ = data.get('chapter_')
+    
+    if not chapter_:
+        return jsonify({"error": "Missing chapter"}), 400
+    
+    try:
+        current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        
+        # Ensure we're using the correct absolute paths
+        input_file = os.path.join(current_dir, "generated_tests", f"generated_test_{chapter_}.txt")
+        output_file = os.path.join(current_dir, "generated_tests", f"output_{chapter_}.csv")
+        
+        # Check if the text file exists
+        if not os.path.exists(input_file):
+            return jsonify({"error": f"Test file not found: {input_file}"}), 404
+        
+        # Process the file to create the CSV
+        df = preprocess_questions(input_file, output_file)
+        
+        return jsonify({
+            "success": True, 
+            "message": "CSV generated successfully",
+            "csv_file": output_file,
+            "question_count": len(df)
+        }), 200
+        
     except Exception as e:
         import traceback
         print(traceback.format_exc())

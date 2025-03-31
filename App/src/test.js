@@ -10,6 +10,7 @@ const TestPage = () => {
 
   const [emojiIndex, setEmojiIndex] = useState(0);
   const [testReady, setTestReady] = useState(false);
+  const [status, setStatus] = useState('Generating questions...');
   const emojis = ["⏳", "🔄", "📝", "⚡", "✅"];
 
   useEffect(() => {
@@ -28,8 +29,10 @@ const TestPage = () => {
       return;
     }
 
-    const startTest = async () => {
+    const prepareTest = async () => {
       try {
+        // Step 1: Generate the test questions (text file)
+        setStatus('Generating questions...');
         const response = await fetch('http://localhost:5000/temp_start_bp', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -43,18 +46,39 @@ const TestPage = () => {
         }
 
         const data = await response.json();
-        if (data.success) {
+        
+        if (!data.success) {
+          throw new Error(data.message || 'Failed to generate test questions');
+        }
+        
+        // Step 2: Generate the CSV file
+        setStatus('Processing questions...');
+        const csvResponse = await fetch('http://localhost:5000/generate_csv', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ chapter_: chapter_ }),
+        });
+        
+        if (!csvResponse.ok) {
+          const errorData = await csvResponse.json();
+          throw new Error(errorData.message || 'Failed to process test questions');
+        }
+        
+        const csvData = await csvResponse.json();
+        
+        if (csvData.success) {
+          setStatus('Test ready!');
           setTestReady(true);
         } else {
-          alert(data.message);
+          throw new Error(csvData.message || 'Failed to prepare test data');
         }
       } catch (error) {
-        console.error('Error starting test:', error);
-        alert(error.message || 'Failed to start test.');
+        console.error('Error preparing test:', error);
+        alert(error.message || 'Failed to prepare test.');
       }
     };
 
-    startTest();
+    prepareTest();
   }, [chapter_, userEmail, navigate]); // Added dependencies
 
   return (
@@ -87,7 +111,7 @@ const TestPage = () => {
               className="bg-gray-500 text-white font-bold py-2 px-6 rounded flex items-center space-x-3"
             >
               <Loader2 className="h-5 w-5 animate-spin" />
-              <span>Preparing Test... {emojis[emojiIndex]}</span>
+              <span>{status} {emojis[emojiIndex]}</span>
             </button>
           )}
         </div>

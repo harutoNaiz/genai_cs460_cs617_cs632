@@ -1,0 +1,305 @@
+Here are the 5 multiple choice questions on 2_Core Algorithms for Problem Solving under From Bubble Sort to Merge Sort:
+
+**Question 1**
+What is the primary purpose of the selection sort algorithm?
+a. To search for a specific element in an array.
+b. To arrange the elements of an array in a specific order.
+c. To find the maximum or minimum element in an array.
+d. To traverse an array in a circular manner.
+
+**Correct answer: b. To arrange the elements of an array in a specific order.**
+**Subtopic: Selection Sort**
+**What in that subtopic exactly: Purpose of Selection Sort**
+**Difficulty: e**
+
+**Question 2**
+Which of the following is a key characteristic of the insertion sort algorithm?
+a. It uses a buffer to temporarily hold elements.
+b. It uses recursion to sort the array.
+c. It compares each element with the previous ones.
+d. It is a divide-and-conquer algorithm.
+
+**Correct answer: c. It compares each element with the previous ones.**
+**Subtopic: Insertion Sort**
+**What in that subtopic exactly: Characteristics of Insertion Sort**
+**Difficulty: m**
+
+**Question 3**
+What is the time complexity of the merge sort algorithm in the worst case?
+a. O(n log n)
+b. O(n^2)
+c. O(n)
+d. O(log n)
+
+**Correct answer: a. O(n log n)**
+**Subtopic: Merge Sort**
+**What in that subtopic exactly: Time Complexity of Merge Sort**
+**Difficulty: m**
+
+**Question 4**
+How does the partition scheme in quicksort work?
+a. It swaps the pivot element with the middle element of the array.
+b. It partitions the array into two halves, one with elements less than the pivot and one with elements greater than the pivot.
+c. It searches for the maximum element in the array and swaps it with the pivot.
+d. It iteratively swaps the pivot element with each element in the array.
+
+**Correct answer: b. It partitions the array into two halves, one with elements less than the pivot and one with elements greater than the pivot.**
+**Subtopic: Quick Sort**
+**What in that subtopic exactly: Partition Scheme in Quick Sort**
+**Difficulty: h**
+
+**Question 5**
+What is the main difference between the top-down and bottom-up merge sort algorithms?
+a. The direction of the merge operation.
+b. The way the pivot is chosen.
+c. The use of recursion.
+d. The way the array is divided.
+
+**Correct answer: a. The direction of the merge operation.**
+**Subtopic: Merge Sort**
+**What in that subtopic exactly: Top-Down vs Bottom-Up Merge Sort**
+**Difficulty: h**
+Here are the 5 multiple choice questions on Core Algorithms for Problem Solving under Linear and Binary Search Techniques:
+
+**Question 1**
+What is the time complexity of Linear Search in the worst-case scenario?
+a. O(log n)
+b. O(n)
+c. O(n^2)
+d. O(2^n)
+
+**Correct answer: b. O(n)**
+**Subtopic: Linear Search**
+**What in that subtopic exactly: Time complexity**
+**Difficulty: e**
+
+**Question 2**
+Which of the following is a prerequisite for performing a Binary Search on an array?
+a. The array should be sorted in ascending order.
+b. The array should be sorted in descending order.
+c. The array should have an even number of elements.
+d. The array should have an odd number of elements.
+
+**Correct answer: a. The array should be sorted in ascending order.**
+**Subtopic: Binary Search**
+**What in that subtopic exactly: Prerequisites**
+**Difficulty: m**
+
+**Question 3**
+What is the time complexity of Binary Search in the worst-case scenario?
+a. O(log log n)
+b. O(log n)
+c. O(n)
+d. O(n^2)
+
+**Correct answer: b. O(log n)**
+**Subtopic: Binary Search**
+**What in that subtopic exactly: Time complexity**
+**Difficulty: m**
+
+**Question 4**
+Suppose we have an array of 10 elements, and we want to find an element using Binary Search. If the element is not present in the array, how many comparisons will the Binary Search algorithm make in the worst-case scenario?
+a. 1
+b. 3
+c. 5
+d. 4
+
+**Correct answer: d. 4**
+**Subtopic: Binary Search**
+**What in that subtopic exactly: Number of Comparisons**
+**Difficulty: h**
+
+**Question 5**
+Consider an array of 128 elements, and we want to find an element using Binary Search. What is the maximum number of comparisons required to find the element in the worst-case scenario?
+a. 5
+b. 6
+c. 7
+d. 8
+
+**Correct answer: b. 7**
+**Subtopic: Binary Search**
+**What in that subtopic exactly: Number of Comparisons**
+**Difficulty: h**
+Here are five multiple-choice questions on Core Algorithms for Problem Solving under Greedy Algorithm:
+
+**Question 1**
+What is the main concept of the Greedy Algorithm?
+a. Divide and Conquer
+b. Backtracking
+c. Making the locally optimal choice
+d. Dynamic Programming
+
+**Correct answer: c. Making the locally optimal choice**
+**Subtopic: Introduction to Greedy Algorithm**
+**What in that subtopic exactly: Definition of Greedy Algorithm**
+**Difficulty: e**
+
+**Question 2**
+Which of the following problems can be solved using the Greedy Algorithm?
+a. Knapsack Problem
+b. Traveling Salesman Problem
+c. Binary Search
+d. Sorting
+
+**Correct answer: a. Knapsack Problem**
+**Subtopic: Applications of Greedy Algorithm**
+**What in that subtopic exactly: Examples of problems that can be solved using Greedy Algorithm**
+**Difficulty: m**
+
+**Question 3**
+What is the key to ensuring the Greedy Algorithm yields an optimal solution?
+a. Considering all possible solutions
+b. Making the globally optimal choice
+c. Choosing the locally optimal solution at each step
+d. Using a recursive approach
+
+**Correct answer: c. Choosing the locally optimal solution at each step**
+**Subtopic: Conditions for Greedy Algorithm**
+**What in that subtopic exactly: Optimal Substructure and Greedy Choice Property**
+**Difficulty: m**
+
+**Question 4**
+Consider a problem where you need to find the minimum number of coins to make a certain amount of money. A Greedy approach would involve:
+a. Finding the minimum number of coins by recursively trying all possible combinations
+b. Selecting the largest denomination of coin first
+c. Considering the coin with the highest value-to-weight ratio first
+d. Using a dynamic programming table to store intermediate results
+
+**Correct answer: b. Selecting the largest denomination of coin first**
+**Subtopic: Coin Changing Problem**
+**What in that subtopic exactly: Greedy approach to Coin Changing Problem**
+**Difficulty: h**
+
+**Question 5**
+Which of the following statements is true about the Greedy Algorithm?
+a. It is guaranteed to find the global optimum for any problem
+b. It can be used to solve any type of problem
+c. It is not suitable for problems with overlapping subproblems
+d. It may produce a suboptimal solution if the locally optimal choice is not globally optimal
+
+**Correct answer: d. It may produce a suboptimal solution if the locally optimal choice is not globally optimal**
+**Subtopic: Limitations of Greedy Algorithm**
+**What in that subtopic exactly: Cases where Greedy Algorithm may fail**
+**Difficulty: h**
+Here are 5 multiple choice questions on 2_Core Algorithms for Problem Solving under Dynamic Programming:
+
+**Question 1**
+What is the main idea behind Dynamic Programming?
+a. To break down a problem into smaller subproblems and solve each only once.
+b. To solve a problem using divide and conquer approach.
+c. To use memoization to store the results of expensive function calls.
+d. To use backtracking to find all possible solutions.
+
+**Correct answer: a. To break down a problem into smaller subproblems and solve each only once.**
+**Subtopic: Dynamic Programming Fundamentals**
+**What in that subtopic exactly: Definition of Dynamic Programming**
+**Difficulty: e**
+
+**Question 2**
+What is memoization in Dynamic Programming?
+a. A technique to memoize the results of expensive function calls to avoid recomputation.
+b. A technique to solve a problem using a recursive approach.
+c. A technique to break down a problem into smaller subproblems.
+d. A technique to use backtracking to find all possible solutions.
+
+**Correct answer: a. A technique to memoize the results of expensive function calls to avoid recomputation.**
+**Subtopic: Memoization**
+**What in that subtopic exactly: Definition of Memoization**
+**Difficulty: m**
+
+**Question 3**
+What is the time complexity of the Fibonacci series using Dynamic Programming?
+a. O(2^n)
+b. O(n)
+c. O(n^2)
+d. O(log n)
+
+**Correct answer: b. O(n)**
+**Subtopic: Dynamic Programming Applications**
+**What in that subtopic exactly: Time Complexity of Fibonacci Series**
+**Difficulty: m**
+
+**Question 4**
+What is the difference between Top-Down and Bottom-Up approaches in Dynamic Programming?
+a. Top-Down is a recursive approach, while Bottom-Up is an iterative approach.
+b. Top-Down is an iterative approach, while Bottom-Up is a recursive approach.
+c. Top-Down solves the problem by breaking it down into smaller subproblems, while Bottom-Up solves the problem by combining the solutions of smaller subproblems.
+d. Top-Down solves the problem by combining the solutions of smaller subproblems, while Bottom-Up solves the problem by breaking it down into smaller subproblems.
+
+**Correct answer: a. Top-Down is a recursive approach, while Bottom-Up is an iterative approach.**
+**Subtopic: Dynamic Programming Approaches**
+**What in that subtopic exactly: Top-Down vs Bottom-Up Approaches**
+**Difficulty: h**
+
+**Question 5**
+What is the optimal substructure property in Dynamic Programming?
+a. The problem can be divided into smaller subproblems, and the optimal solution to the larger problem can be constructed from the optimal solutions of the subproblems.
+b. The problem can be divided into smaller subproblems, and the optimal solution to the larger problem can be constructed from the approximate solutions of the subproblems.
+c. The problem cannot be divided into smaller subproblems, and the optimal solution to the larger problem can be constructed from the optimal solutions of the subproblems.
+d. The problem can be divided into smaller subproblems, and the optimal solution to the larger problem can be constructed from the heuristic solutions of the subproblems.
+
+**Correct answer: a. The problem can be divided into smaller subproblems, and the optimal solution to the larger problem can be constructed from the optimal solutions of the subproblems.**
+**Subtopic: Dynamic Programming Principles**
+**What in that subtopic exactly: Optimal Substructure Property**
+**Difficulty: h**
+Here are five multiple-choice questions on 2_Core Algorithms for Problem Solving under Graph Algorithms, ranging from easy to very hard:
+
+**Question 1**
+What is the time complexity of the Breadth-First Search (BFS) algorithm?
+a. O(|V| + |E|)
+b. O(|V|^2 + |E|)
+c. O(|V|*|E|)
+d. O(|E|^2)
+
+**Correct answer: a. O(|V| + |E|)**
+**Subtopic: Breadth-First Search (BFS)**
+**What in that subtopic exactly: Time complexity of BFS**
+**Difficulty: e**
+
+**Question 2**
+Which graph traversal algorithm is guaranteed to find the shortest path from a source node to all other nodes in an unweighted graph?
+a. Depth-First Search (DFS)
+b. Breadth-First Search (BFS)
+c. Dijkstra's algorithm
+d. Bellman-Ford algorithm
+
+**Correct answer: b. Breadth-First Search (BFS)**
+**Subtopic: Unweighted Graphs**
+**What in that subtopic exactly: Shortest path in unweighted graphs**
+**Difficulty: m**
+
+**Question 3**
+What is the main purpose of the Union function in the Kruskal's algorithm for finding the Minimum Spanning Tree (MST) of a graph?
+a. To find the minimum edge weight in the graph
+b. To merge two disjoint sets into a single set
+c. To find the maximum flow in the graph
+d. To topologically sort the vertices of the graph
+
+**Correct answer: b. To merge two disjoint sets into a single set**
+**Subtopic: Kruskal's algorithm**
+**What in that subtopic exactly: Union function in Kruskal's algorithm**
+**Difficulty: m**
+
+**Question 4**
+Which of the following is a correct property of a Strongly Connected Component (SCC) in a directed graph?
+a. It contains at least one cycle
+b. It contains at most one cycle
+c. It is a subgraph that has a path from every node to every other node
+d. It is a directed acyclic graph
+
+**Correct answer: c. It is a subgraph that has a path from every node to every other node**
+**Subtopic: Strongly Connected Components**
+**What in that subtopic exactly: Definition and properties of SCCs**
+**Difficulty: h**
+
+**Question 5**
+What is the purpose of the Low-Link values in the Tarjan's algorithm for finding Strongly Connected Components (SCCs) in a directed graph?
+a. To keep track of the discovery time of each node
+b. To keep track of the lowest link value reachable from each node
+c. To keep track of the number of nodes in each SCC
+d. To keep track of the maximum flow in the graph
+
+**Correct answer: b. To keep track of the lowest link value reachable from each node**
+**Subtopic: Tarjan's algorithm**
+**What in that subtopic exactly: Low-Link values in Tarjan's algorithm**
+**Difficulty: h**
