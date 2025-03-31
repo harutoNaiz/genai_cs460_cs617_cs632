@@ -30,6 +30,7 @@ const TestResults = () => {
   
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 p-4">
+      
       <div className="max-w-4xl mx-auto mt-8">
         {/* Results Header */}
         <div className="bg-white rounded-lg shadow-lg p-6 mb-6 text-center">

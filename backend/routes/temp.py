@@ -5,7 +5,6 @@ from config import get_db
 from groq import Groq
 import pandas as pd
 import re
-import time
 
 temp_start_bp = Blueprint('temp_start_bp', __name__)
 csv_generation_bp = Blueprint('csv_generation_bp', __name__)
@@ -24,13 +23,19 @@ def preprocess_questions(file_path, output_csv):
         lines = q.strip().split('\n')
         
         question_text = lines[0].strip()
-        options = [line.strip() for line in lines[1:5]]
+        
+        # Removing option characters (e.g., "a.", "b.", "c.", "d.") from the start of options
+        options = [re.sub(r'^[a-d]\.\s*', '', line.strip()) for line in lines[1:5]]
+        
         correct_option_match = re.search(r'\*\*Correct answer: (.*?)\*\*', q)
         subtopic_match = re.search(r'\*\*Subtopic: (.*?)\*\*', q)
         subtopic_detail_match = re.search(r'\*\*What in that subtopic exactly: (.*?)\*\*', q)
         difficulty_match = re.search(r'\*\*Difficulty: (.*?)\*\*', q)
         
+        # Extract and clean the correct option
         correct_option = correct_option_match.group(1) if correct_option_match else ''
+        correct_option = re.sub(r'^[a-d]\.\s*', '', correct_option)  # Remove "a.", "b.", etc.
+        
         subtopic = subtopic_match.group(1) if subtopic_match else ''
         subtopic_detail = subtopic_detail_match.group(1) if subtopic_detail_match else ''
         difficulty = difficulty_match.group(1) if difficulty_match else ''
@@ -41,6 +46,8 @@ def preprocess_questions(file_path, output_csv):
     
     df.to_csv(output_csv, index=False, encoding='utf-8')
     return df
+
+
 
 def generate_questions(topic, subtopic, model="llama3-70b-8192"):
     prompt = (f"Generate 5 multiple choice questions on {topic} under {subtopic}. "
@@ -82,8 +89,23 @@ def generate_questions(topic, subtopic, model="llama3-70b-8192"):
     )
     return response.choices[0].message.content
 
+def clear_generated_tests():
+    dir_path = "/home/pes2ug22cs632/gen_ai/backend/generated_tests"
+    if os.path.exists(dir_path):
+        for file in os.listdir(dir_path):
+            file_path = os.path.join(dir_path, file)
+            try:
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+            except Exception as e:
+                print(f"Error deleting {file_path}: {e}")
+
+
 @temp_start_bp.route('/temp_start_bp', methods=['POST'])
 def start_test():
+    # Clear the generated_tests directory
+    clear_generated_tests()
+
     data = request.json
     email = data.get('email')
     chapter_ = data.get('chapter_')

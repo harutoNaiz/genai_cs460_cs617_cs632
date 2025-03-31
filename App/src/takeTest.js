@@ -134,7 +134,7 @@ const TakeTest = () => {
 
     questions.forEach((question, index) => {
       const userAnswer = userAnswers[index];
-      const correctAnswer = question['Correct Option'];
+      const correctAnswerText = question['Correct Option'];
       const subtopic = question.Subtopic;
       const subtopicDetail = question['Subtopic Detail'];
       const difficulty = question.Difficulty?.toLowerCase() || 'e';
@@ -150,9 +150,14 @@ const TakeTest = () => {
       else if (difficulty === 'h') results.totalByDifficulty.hard += 1;
       
       results.totalScore += points;
+
+      // Find the correct option letter by checking which option matches the correct answer text
+      const correctAnswer = Object.entries(question).find(([key, value]) =>
+        key.startsWith('Option') && value.trim() === correctAnswerText.trim()
+      )?.[0]?.split(' ')[1]; // Extract 'A', 'B', 'C', or 'D'
       
       // Check if answer is correct
-      if (userAnswer && userAnswer === correctAnswer.charAt(0)) {
+      if (userAnswer && userAnswer === correctAnswer) {
         results.score += points;
         
         // Track difficulty stats for correct answers
