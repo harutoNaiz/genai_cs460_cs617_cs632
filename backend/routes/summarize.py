@@ -4,10 +4,10 @@ from utils import extract_number, get_stripped_name
 from config import get_db
 import subprocess
 
-generate_bp = Blueprint('generate', __name__)
+summarize_bp = Blueprint('summarize', __name__)
 db = get_db()
 
-@generate_bp.route('/get-topic-content', methods=['POST'])
+@summarize_bp.route('/get-topic-content', methods=['POST'])
 def get_topic_content():
     data = request.json
     email = data.get('email')
@@ -59,7 +59,7 @@ def get_topic_content():
         print(traceback.format_exc())  # Print full traceback for debugging
         return jsonify({"error": str(e)}), 500
     
-@generate_bp.route('/summarize-content', methods=['POST'])
+@summarize_bp.route('/summarize-content', methods=['POST'])
 def summarize_content():
     data = request.json
     content = data.get('content')
