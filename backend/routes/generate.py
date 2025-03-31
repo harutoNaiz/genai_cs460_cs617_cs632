@@ -45,37 +45,6 @@ def get_topic_content():
         
         with open(topic_path, 'r', encoding='utf-8') as file:
             topic_content = file.read()
-            # topic_content = topic_content[0:100]
-
-        # 4. Use Gemini API to generate enhanced explanation
-        model_name = "deepseek-r1:1.5b"  # Ensure you have this model in Ollama
-        prompt = f"""
-        You are an expert educational assistant. Given the following topic from a {course} course, 
-        provide a detailed, clear, and engaging explanation for students.
-        Chapter: {chapter_name}
-        Topic: {topic_name}
-        
-        Content to enhance:
-        {topic_content}
-        
-        Generate a comprehensive explanation that includes:
-        1. A clear introduction to the topic
-        2. Thorough explanation of key concepts
-        3. Examples and applications where relevant
-        4. Diagrams or illustrations
-        
-        Make the explanation educational, engaging, and easy to understand for students.
-        """
-
-        # Run Ollama command using subprocess
-        command = ["ollama", "run", model_name, prompt]
-        # result = subprocess.run(command, capture_output=True, text=True)
-
-        # if result.returncode != 0:
-        #     return jsonify({"error": "Ollama failed to generate content", "details": result.stderr}), 500
-        
-        # enhanced_content = result.stdout.strip()
-        # print(enhanced_content)
 
         return jsonify({
             "topicContent": topic_content,
@@ -88,4 +57,44 @@ def get_topic_content():
     except Exception as e:
         import traceback
         print(traceback.format_exc())  # Print full traceback for debugging
+        return jsonify({"error": str(e)}), 500
+    
+@generate_bp.route('/summarize-content', methods=['POST'])
+def summarize_content():
+    data = request.json
+    content = data.get('content')
+    
+    if not content:
+        return jsonify({"error": "Missing content to summarize"}), 400
+    
+    try:
+        # Use Ollama to generate a summary
+        model_name = "deepseek-r1:1.5b"  # Use the same model as before
+        prompt = f"""
+        Summarize the following text concisely while retaining the key points:
+        
+        {content}
+        
+        Provide a summary that:
+        1. Covers the main concepts
+        2. Is approximately 25% of the original length
+        3. Maintains clarity and educational value
+        """
+
+        # Run Ollama command using subprocess
+        command = ["ollama", "run", model_name, prompt]
+        result = subprocess.run(command, capture_output=True, text=True)
+
+        if result.returncode != 0:
+            return jsonify({"error": "Ollama failed to generate summary", "details": result.stderr}), 500
+        
+        summary = result.stdout.strip()
+
+        return jsonify({
+            "summary": summary
+        }), 200
+
+    except Exception as e:
+        import traceback
+        print(traceback.format_exc())
         return jsonify({"error": str(e)}), 500

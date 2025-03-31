@@ -1,4 +1,3 @@
-// TopicPage.js
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -18,6 +17,11 @@ const TopicPage = () => {
     chapterTitle: '',
     topicTitle: ''
   });
+  
+  // New states for summarize functionality
+  const [summary, setSummary] = useState('');
+  const [isSummarizing, setIsSummarizing] = useState(false);
+  const [showSummary, setShowSummary] = useState(false);
 
   useEffect(() => {
     if (!userEmail) {
@@ -103,6 +107,42 @@ const TopicPage = () => {
   const handleBackClick = () => {
     navigate('/chapters');
   };
+  
+  // New handler for summarize button
+  const handleSummarize = () => {
+    // If we already have a summary, just toggle visibility
+    if (summary) {
+      setShowSummary(!showSummary);
+      return;
+    }
+    
+    // Otherwise, request a summary
+    setIsSummarizing(true);
+    
+    fetch('http://localhost:5000/summarize-content', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        content: topicData.enhancedContent 
+      })
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Failed to generate summary');
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setSummary(data.summary);
+        setShowSummary(true);
+        setIsSummarizing(false);
+      })
+      .catch((err) => {
+        console.error('Error generating summary:', err);
+        setError('Failed to generate summary. Please try again.');
+        setIsSummarizing(false);
+      });
+  };
 
   if (isLoading) {
     return (
@@ -172,7 +212,48 @@ const TopicPage = () => {
           <div className="prose prose-invert max-w-none">
             {topicData.enhancedContent ? renderContent(topicData.enhancedContent) : <p>No enhanced content available.</p>}
           </div>
+
+          {/* Summary section */}
+          {showSummary && summary && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-8 p-4 bg-blue-700 bg-opacity-40 rounded-lg border border-blue-400 border-opacity-30"
+            >
+              <h3 className="text-xl font-bold mb-3">Summary</h3>
+              <div className="prose prose-invert max-w-none">
+                {renderContent(summary)}
+              </div>
+            </motion.div>
+          )}
         </motion.div>
+        
+        {/* Summarize button */}
+        <div className="flex justify-center mb-8">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleSummarize}
+            disabled={isSummarizing}
+            className="px-6 py-3 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg flex items-center"
+          >
+            {isSummarizing ? (
+              <>
+                <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white mr-2"></div>
+                <span>Summarizing...</span>
+              </>
+            ) : summary ? (
+              showSummary ? "Hide Summary" : "Show Summary"
+            ) : (
+              <>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+                </svg>
+                Summarize
+              </>
+            )}
+          </motion.button>
+        </div>
       </div>
     </div>
   );

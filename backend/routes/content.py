@@ -28,6 +28,7 @@ def get_chapters():
             
         user_doc = query[0].to_dict()
         course = user_doc.get('course')
+        rank = user_doc.get("rank")
         
         if not course:
             return jsonify({"error": "No course found for user"}), 404
@@ -55,15 +56,17 @@ def get_chapters():
                 )
 
                 # Strip numeric prefix from chapter and topics
+                chapter_rank = extract_number(chapter_name)
                 stripped_chapter_name = get_stripped_name(chapter_name)
                 stripped_topics = [get_stripped_name(topic) for topic in topics]
 
                 chapters.append({
+                    "chapter_rank" : chapter_rank,
                     "chapterName": stripped_chapter_name,
-                    "topics": stripped_topics
+                    "topics": stripped_topics 
                 })
 
-        return jsonify({"chapters": chapters}), 200
+        return jsonify({"chapters": chapters,"rank": rank}), 200
 
     except Exception as e:
         import traceback
