@@ -6,6 +6,9 @@ import SignupPage from './SignUp';
 import ChaptersPage from './chapters';
 import TopicPage from './TopicPage';
 import TestPage from './test'
+import TakeTest from './takeTest'
+import TestResults from './results'
+
 import './index.css';
 
 const App = () => {
@@ -18,6 +21,8 @@ const App = () => {
         <Route path="/chapters" element={<ChaptersPage />} />
         <Route path="/chapters/:chapterName/:topic" element={<TopicPage />} />
         <Route path="/test" element={<TestPage />} />
+        <Route path="/taketest" element={<TakeTest />} />
+        <Route path="/test-results" element={<TestResults />} />
       </Routes>
     </Router>
   );

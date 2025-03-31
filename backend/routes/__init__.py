@@ -7,6 +7,8 @@ from routes.content import content_bp
 from routes.summarize import summarize_bp
 from routes.temp import temp_start_bp
 from routes.temp import csv_generation_bp
+from routes.submission import submit_test_bp
+from routes.serve import serve_bp
 
 def register_blueprints(app):
     """Register all blueprints with the Flask app"""
@@ -17,3 +19,5 @@ def register_blueprints(app):
     app.register_blueprint(summarize_bp, url_prefix='')
     app.register_blueprint(temp_start_bp, url_prefix='')
     app.register_blueprint(csv_generation_bp, url_prefix='')
+    app.register_blueprint(submit_test_bp, url_prefix='')
+    app.register_blueprint(serve_bp, url_prefix='')
