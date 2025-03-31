@@ -61,7 +61,7 @@ def get_chapters():
                 stripped_topics = [get_stripped_name(topic) for topic in topics]
 
                 chapters.append({
-                    "chapter_rank" : chapter_rank,
+                    "chapter_" : chapter_rank,
                     "chapterName": stripped_chapter_name,
                     "topics": stripped_topics 
                 })

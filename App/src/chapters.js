@@ -1,30 +1,25 @@
-// chapters.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, Lock } from 'lucide-react';
 import Header from './Header'; // Adjust the path as necessary
 
 const ChaptersPage = () => {
   const navigate = useNavigate();
-  
-  // Assume the user's email is stored in localStorage after login.
   const userEmail = localStorage.getItem('userEmail');
-  
-  // Data structure for chapters
+
   const [chaptersData, setChaptersData] = useState([]);
   const [expandedChapter, setExpandedChapter] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [rank, setRank] = useState(0);
 
   useEffect(() => {
-    // Check if user is logged in
     if (!userEmail) {
       navigate('/login');
       return;
     }
 
-    // On component mount, fetch the chapters from the Flask backend
     setIsLoading(true);
     fetch('http://localhost:5000/get-chapters', {
       method: 'POST',
@@ -41,6 +36,7 @@ const ChaptersPage = () => {
         if (data.chapters) {
           setChaptersData(data.chapters);
           setExpandedChapter(null);
+          setRank(data.rank);
         } else {
           throw new Error(data.error || 'Unknown error');
         }
@@ -54,16 +50,23 @@ const ChaptersPage = () => {
   }, [userEmail, navigate]);
 
   const handleChapterClick = (index) => {
-    setExpandedChapter(expandedChapter === index ? null : index);
+    setExpandedChapter((prev) => (prev === index ? null : index));
   };
 
-  const handleTopicClick = (chapterName, topic) => {
-    // Navigate to the topic page with the encoded parameters
-    // URL encoding to handle special characters in chapter or topic names
+  // Function to check if the topic is unlocked
+  const isTopicUnlocked = (chapter_) => {
+    return rank >= chapter_;
+  };
+
+  const handleTopicClick = (chapter_, chapterName, topic) => {
+    if (!isTopicUnlocked(chapter_)) {
+      alert('Please complete the above topics before proceeding.');
+      return;
+    }
+    
     const encodedChapterName = encodeURIComponent(chapterName);
     const encodedTopic = encodeURIComponent(topic);
     navigate(`/chapters/${encodedChapterName}/${encodedTopic}`);
-    // navigate(`/`);
   };
 
   if (isLoading) {
@@ -93,12 +96,9 @@ const ChaptersPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 text-white p-6">
-      {/* Using the separated Header component */}
       <Header />
       <div className="mt-16">
-        <h2 className="text-4xl font-bold mb-8 text-center">
-          Chapters
-        </h2>
+        <h2 className="text-4xl font-bold mb-8 text-center">Chapters</h2>
         <div className="max-w-3xl mx-auto">
           {chaptersData.length > 0 ? (
             chaptersData.map((chapter, index) => (
@@ -112,33 +112,29 @@ const ChaptersPage = () => {
                   {expandedChapter === index ? <ChevronUp /> : <ChevronDown />}
                 </motion.div>
                 {expandedChapter === index && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="mt-2 ml-4"
-                  >
-                    {chapter.topics.map((topic, idx) => (
-                      <motion.div
-                        key={idx}
-                        whileHover={{ scale: 1.02 }}
-                        onClick={() => handleTopicClick(chapter.chapterName, topic)}
-                        className="bg-white bg-opacity-20 p-3 rounded-lg my-1 cursor-pointer flex items-center justify-between"
-                      >
-                        <span>{topic}</span>
-                        <svg 
-                          xmlns="http://www.w3.org/2000/svg" 
-                          className="h-5 w-5" 
-                          viewBox="0 0 20 20" 
-                          fill="currentColor"
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-2 ml-4">
+                    {chapter.topics.map((topic, idx) => {
+                      const unlocked = isTopicUnlocked(chapter.chapter_);
+                      return (
+                        <motion.div
+                          key={idx}
+                          whileHover={{ scale: unlocked ? 1.02 : 1 }}
+                          onClick={() => handleTopicClick(chapter.chapter_, chapter.chapterName, topic)}
+                          className={`p-3 rounded-lg my-1 flex items-center justify-between cursor-pointer
+                            ${unlocked ? 'bg-white bg-opacity-20' : 'bg-gray-400 opacity-50 cursor-not-allowed'}
+                          `}
                         >
-                          <path 
-                            fillRule="evenodd" 
-                            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" 
-                            clipRule="evenodd" 
-                          />
-                        </svg>
-                      </motion.div>
-                    ))}
+                          <span>{topic}</span>
+                          {unlocked ? (
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                              <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                            </svg>
+                          ) : (
+                            <Lock className="h-5 w-5" />
+                          )}
+                        </motion.div>
+                      );
+                    })}
                   </motion.div>
                 )}
               </div>
