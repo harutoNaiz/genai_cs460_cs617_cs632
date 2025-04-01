@@ -92,6 +92,7 @@ const ProfilePage = () => {
       </div>
 
       <Header />
+      <br/>
       
       <div className="pt-24 pb-12 px-6 max-w-7xl mx-auto">
         <motion.button
@@ -166,7 +167,7 @@ const ProfilePage = () => {
               </h2>
               
               <div className="space-y-4">
-                {[1, 2, 3, 4, 5].map((chapter) => (
+                {[1, 2, 3].map((chapter) => (
                   <div key={chapter} className="border-b border-stone-200/50 pb-4 last:border-0 last:pb-0">
                     <motion.button
                       whileHover={{ backgroundColor: 'rgba(245, 245, 244, 0.5)' }}
