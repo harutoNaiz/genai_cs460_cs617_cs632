@@ -56,81 +56,111 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-500 text-white flex flex-col justify-center items-center p-4">
+    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-stone-100 font-serif flex flex-col justify-center items-center p-4">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 overflow-hidden opacity-10">
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full bg-stone-400"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              width: `${Math.random() * 60 + 20}px`,
+              height: `${Math.random() * 60 + 20}px`,
+            }}
+            animate={{
+              y: [0, Math.random() * 50 - 25],
+              opacity: [0.05, 0.1, 0.05],
+            }}
+            transition={{
+              duration: Math.random() * 10 + 15,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+          />
+        ))}
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="bg-white bg-opacity-20 p-8 rounded-lg shadow-lg w-full max-w-md"
+        className="bg-white bg-opacity-20 p-8 rounded-lg shadow-lg w-full max-w-md relative z-10"
       >
         {step === 1 ? (
           <>
-            <h2 className="text-3xl font-bold mb-6 text-center">Join LearnAI</h2>
+            <h2 className="text-3xl mb-6 text-center text-stone-800">Join LearnAI</h2>
             <form onSubmit={handleSignup} className="space-y-4">
               <div>
-                <label htmlFor="name" className="block mb-1">Full Name</label>
+                <label htmlFor="name" className="block mb-1 text-stone-800">Full Name</label>
                 <div className="relative">
                   <input
                     type="text"
                     id="name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full px-3 py-2 bg-white bg-opacity-50 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-300 pl-10"
+                    className="w-full px-3 py-2 bg-white bg-opacity-50 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-300 pl-10
+                    shadow-md border border-stone-500 backdrop-blur-md"
                     required
                   />
                   <User className="absolute left-3 top-2.5 text-gray-500" size={20} />
                 </div>
               </div>
               <div>
-                <label htmlFor="email" className="block mb-1">Email</label>
+                <label htmlFor="email" className="block mb-1 text-stone-800">Email</label>
                 <div className="relative">
                   <input
                     type="email"
                     id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-3 py-2 bg-white bg-opacity-50 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-300 pl-10"
+                    className="w-full px-3 py-2 bg-white bg-opacity-50 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-300 pl-10
+                    shadow-md border border-stone-500 backdrop-blur-md"
                     required
                   />
                   <Mail className="absolute left-3 top-2.5 text-gray-500" size={20} />
                 </div>
               </div>
               <div>
-                <label htmlFor="password" className="block mb-1">Password</label>
+                <label htmlFor="password" className="block mb-1 text-stone-800">Password</label>
                 <div className="relative">
                   <input
                     type="password"
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-3 py-2 bg-white bg-opacity-50 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-300 pl-10"
+                    className="w-full px-3 py-2 bg-white bg-opacity-50 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-300 pl-10
+                    shadow-md border border-stone-500 backdrop-blur-md"
                     required
                   />
                   <Lock className="absolute left-3 top-2.5 text-gray-500" size={20} />
                 </div>
               </div>
+              <br/>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full bg-red-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out"
+                className="w-1/2 mx-auto bg-gradient-to-r from-stone-700 to-stone-600 text-amber-50 py-2.5 px-5 rounded-full text-xl shadow-md flex items-center justify-center transition-all mt-12"
                 type="submit"
               >
-                Sign Up
+                Continue
               </motion.button>
             </form>
           </>
         ) : (
           <>
-            <h2 className="text-3xl font-bold mb-6 text-center">Additional Details</h2>
+            <h2 className="text-3xl mb-6 text-center text-stone-800">Additional Details</h2>
             <form onSubmit={handleDetailsSubmit} className="space-y-4">
               <div>
-                <label htmlFor="course" className="block mb-1">Course</label>
+                <label htmlFor="course" className="block mb-1 text-stone-800">Course</label>
                 <div className="relative">
                   <select
                     id="course"
                     value={course}
                     onChange={(e) => setCourse(e.target.value)}
-                    className="w-full px-3 py-2 bg-white bg-opacity-50 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-300 pl-10"
+                    className="w-full px-3 py-2 bg-white bg-opacity-50 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-300 pl-10
+                    shadow-md border border-stone-500 backdrop-blur-md appearance-none"
                     required
                   >
                     <option value="" disabled selected hidden>Select a course</option>
@@ -142,45 +172,52 @@ const SignupPage = () => {
                 </div>
               </div>
               <div>
-                <label htmlFor="dob" className="block mb-1">Date of Birth</label>
+                <label htmlFor="dob" className="block mb-1 text-stone-800">Date of Birth</label>
                 <div className="relative">
                   <input
                     type="date"
                     id="dob"
                     value={dob}
                     onChange={(e) => setDob(e.target.value)}
-                    className="w-full px-3 py-2 bg-white bg-opacity-50 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-300 pl-10"
+                    className="w-full px-3 py-2 bg-white bg-opacity-50 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-300 pl-10
+                    shadow-md border border-stone-500 backdrop-blur-md"
                     required
                   />
                   <Calendar className="absolute left-3 top-2.5 text-gray-500" size={20} />
                 </div>
               </div>
+              <br/>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full bg-red-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out"
+                className="w-1/2 mx-auto bg-gradient-to-r from-stone-700 to-stone-600 text-amber-50 py-2.5 px-5 rounded-full text-xl shadow-md flex items-center justify-center transition-all mt-12"
                 type="submit"
               >
-                Continue
+                Complete
               </motion.button>
             </form>
           </>
         )}
         <div className="mt-6 text-center">
-          <p>Already have an account? <a href="/login" className="text-red-600 hover:underline">Log in</a></p>
+          <p className="text-stone-800">
+            {step === 1 ? "Already have an account?" : "Want to change something?"} 
+            <a href={step === 1 ? "/login" : "/signup"} className="text-brown-600 hover:underline ml-1">
+              {step === 1 ? "Log in" : "Go back"}
+            </a>
+          </p>
         </div>
       </motion.div>
-      <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="mt-8 text-white flex items-center"
-        onClick={() => {
-          navigate('/login');
-        }}
-      >
-        <ArrowLeft className="mr-2" />
-        Back to Home
-      </motion.button>
+      <motion.div className="relative z-10 mt-8">
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="text-stone-800 flex items-center cursor-pointer"
+          onClick={() => navigate('/')}
+        >
+          <ArrowLeft className="mr-2" />
+          Back to Home
+        </motion.button>
+      </motion.div>
     </div>
   );
 };
