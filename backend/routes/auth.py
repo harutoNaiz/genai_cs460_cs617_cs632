@@ -49,18 +49,6 @@ def signup():
                             "score": 0,
                             "strong_topics":[],
                             "weak_topics":[]
-                    },
-                    "4":{
-                            "chapter_number" : 4,
-                            "score": 0,
-                            "strong_topics":[],
-                            "weak_topics":[]
-                    },
-                    "5":{
-                            "chapter_number" : 5,
-                            "score": 0,
-                            "strong_topics":[],
-                            "weak_topics":[]
                     }
                 },
             'createdAt': firestore.SERVER_TIMESTAMP
