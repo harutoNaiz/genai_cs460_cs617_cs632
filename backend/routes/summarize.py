@@ -3,10 +3,16 @@ from config import get_db
 from groq import Groq
 import os
 import traceback
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("GROQ_API_KEY")
+if not api_key:
+    raise ValueError("GROQ_API_KEY environment variable not set")
 
 summarize_bp = Blueprint('summarize', __name__)
 db = get_db()
-client = Groq(api_key="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")
+client = Groq(api_key=api_key)
 
 def get_user_weak_topics(email, chapter_name):
     try:
