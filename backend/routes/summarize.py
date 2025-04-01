@@ -33,11 +33,12 @@ def generate_enhanced_content(topic, chapter_name, weak_topics=None):
     Generate comprehensive educational content about {topic} under {chapter_name}. atleast 2000 words
     
     Requirements:
-    1. Format the content with clear markdown formatting (headers, lists, code blocks)
-    2. Include practical examples and code snippets where applicable
+    1. Format the content with clear markdown formatting (headers, lists)
+    2. Include practical examples
     3. Explain concepts clearly with analogies if helpful
     4. Structure the content for optimal learning
-    5. also while adding points make sure not to highlight them to avoid (**)
+    5. Use bold text with <strong>text</strong> tags instead of using ** for emphasis
+    6. For code examples, always use proper markdown code blocks with triple backticks
     
     """
     
@@ -72,7 +73,7 @@ def generate_enhanced_content(topic, chapter_name, weak_topics=None):
     - Concept 4
     - Concept 5
     
-    ## Examples please add this as a code block 
+    ## Examples 
     ```python
     # Practical code example
     def example():

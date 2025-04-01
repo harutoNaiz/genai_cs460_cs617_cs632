@@ -24,23 +24,24 @@ const TopicPage = () => {
   const [isSummarizing, setIsSummarizing] = useState(false);
   const [showSummaryModal, setShowSummaryModal] = useState(false);
 
-  useEffect(() => {
-    if (!userEmail) {
-      navigate('/login');
-      return;
-    }
+    useEffect(() => {
+      if (!userEmail) {
+        navigate('/login');
+        return;
+      }
 
-    setIsLoading(true);
-    
-    fetch('http://localhost:5000/get-topic-content', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
-        email: userEmail,
-        chapterName: chapterName,
-        topicName: topic
+      setIsLoading(true);
+      setError(null);
+      
+      fetch('http://localhost:5000/get-topic-content', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          email: userEmail,
+          chapterName: chapterName,
+          topicName: topic
+        })
       })
-    })
       .then((res) => {
         if (!res.ok) {
           throw new Error('Failed to fetch topic content');
@@ -48,7 +49,22 @@ const TopicPage = () => {
         return res.json();
       })
       .then((data) => {
-        setTopicData(data);
+        // Ensure data has the expected structure
+        if (!data || typeof data !== 'object') {
+          throw new Error('Invalid data format received from server');
+        }
+        
+        // Set default values for missing fields
+        const processedData = {
+          topicContent: data.topicContent || '',
+          enhancedContent: data.enhancedContent || '',
+          courseTitle: data.courseTitle || 'Unknown Course',
+          chapterTitle: data.chapterTitle || chapterName || 'Unknown Chapter',
+          topicTitle: data.topicTitle || topic || 'Unknown Topic',
+          isWeakTopic: !!data.isWeakTopic
+        };
+        
+        setTopicData(processedData);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -57,44 +73,77 @@ const TopicPage = () => {
         setIsLoading(false);
       });
   }, [userEmail, chapterName, topic, navigate]);
-
-  const strippedTopic = topicData.topicTitle.replace('.txt','');
+ 
+  const strippedTopic = topicData?.topicTitle ? topicData.topicTitle.replace('.txt','') : 'Topic';
 
   const renderContent = (content) => {
-    return content.split('\n\n').map((paragraph, index) => {
-      if (paragraph.trim().startsWith('#')) {
-        const level = paragraph.match(/^#+/)[0].length;
-        const text = paragraph.replace(/^#+\s*/, '');
-        const HeaderTag = `h${Math.min(level + 1, 6)}`;
-        return <HeaderTag key={index} className={`font-bold mt-6 mb-3 ${level === 1 ? 'text-3xl' : level === 2 ? 'text-2xl' : 'text-xl'}`}>{text}</HeaderTag>;
-      } else if (paragraph.trim().startsWith('- ') || paragraph.trim().startsWith('* ')) {
-        const items = paragraph.split('\n').map(item => item.replace(/^[*-]\s*/, ''));
-        return (
-          <ul key={index} className="list-disc ml-8 my-4 space-y-2">
-            {items.map((item, idx) => (
-              <li key={idx}>{item}</li>
-            ))}
-          </ul>
-        );
-      } else if (paragraph.trim().startsWith('1. ')) {
-        const items = paragraph.split('\n').map(item => item.replace(/^\d+\.\s*/, ''));
-        return (
-          <ol key={index} className="list-decimal ml-8 my-4 space-y-2">
-            {items.map((item, idx) => (
-              <li key={idx}>{item}</li>
-            ))}
-          </ol>
-        );
-      } else if (paragraph.trim().startsWith('```')) {
-        const code = paragraph.replace(/```[\w]*\n/, '').replace(/```$/, '');
-        return (
-          <pre key={index} className="bg-stone-800/50 p-4 rounded-lg my-6 overflow-x-auto text-sm font-mono border border-stone-700">
+    // First check if content is null or undefined
+    if (!content) {
+      return <p className="text-stone-600">No content available.</p>;
+    }
+  
+    // Split by code blocks to handle them separately
+    const segments = content.split(/(```[\w]*[\s\S]*?```)/);
+    
+    return segments.flatMap((segment, segmentIndex) => {
+      // Check if segment is null or empty
+      if (!segment || segment.trim() === '') {
+        return [];
+      }
+      
+      // Check if this segment is a code block
+      if (segment.trim().startsWith('```')) {
+        const language = segment.match(/```([\w]*)/)?.[1] || '';
+        const code = segment.replace(/```[\w]*\n/, '').replace(/```$/, '');
+        return [(
+          <pre key={`code-${segmentIndex}`} className="bg-stone-800/50 p-4 rounded-lg my-6 overflow-x-auto text-sm font-mono border border-stone-700">
             <code>{code}</code>
           </pre>
-        );
-      } else {
-        return <p key={index} className="my-4 leading-relaxed">{paragraph}</p>;
-      }
+        )];
+      } 
+      
+      // For regular text content
+      return segment.split('\n\n').map((paragraph, index) => {
+        // Check if paragraph is null or empty
+        if (!paragraph || paragraph.trim() === '') {
+          return null; // React will filter out null values
+        }
+        
+        try {
+          // Process paragraph and replace ** with <strong> tags safely
+          const processedParagraph = paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+          
+          if (paragraph.trim().startsWith('#')) {
+            const level = paragraph.match(/^#+/)[0].length;
+            const text = paragraph.replace(/^#+\s*/, '');
+            const HeaderTag = `h${Math.min(level + 1, 6)}`;
+            return <HeaderTag key={`${segmentIndex}-${index}`} className={`font-bold mt-6 mb-3 ${level === 1 ? 'text-3xl' : level === 2 ? 'text-2xl' : 'text-xl'}`} dangerouslySetInnerHTML={{ __html: text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />;
+          } else if (paragraph.trim().startsWith('- ') || paragraph.trim().startsWith('* ')) {
+            const items = paragraph.split('\n').filter(item => item.trim() !== '').map(item => item.replace(/^[*-]\s*/, ''));
+            return (
+              <ul key={`${segmentIndex}-${index}`} className="list-disc ml-8 my-4 space-y-2">
+                {items.map((item, idx) => (
+                  <li key={idx} dangerouslySetInnerHTML={{ __html: item.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+                ))}
+              </ul>
+            );
+          } else if (paragraph.trim().startsWith('1. ')) {
+            const items = paragraph.split('\n').filter(item => item.trim() !== '').map(item => item.replace(/^\d+\.\s*/, ''));
+            return (
+              <ol key={`${segmentIndex}-${index}`} className="list-decimal ml-8 my-4 space-y-2">
+                {items.map((item, idx) => (
+                  <li key={idx} dangerouslySetInnerHTML={{ __html: item.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+                ))}
+              </ol>
+            );
+          } else {
+            return <p key={`${segmentIndex}-${index}`} className="my-4 leading-relaxed" dangerouslySetInnerHTML={{ __html: processedParagraph }} />;
+          }
+        } catch (error) {
+          // console.error("Error processing paragraph:", error, paragraph);
+          // return <p key={`${segmentIndex}-${index}-error`} className="my-4 leading-relaxed text-red-600">Error rendering content.</p>;
+        }
+      }).filter(Boolean); // Filter out null or undefined values
     });
   };
 
@@ -153,6 +202,8 @@ const TopicPage = () => {
     return (
       <div className="min-h-screen bg-gradient-to-b from-amber-50 to-stone-100 font-serif p-6">
         <Header />
+        <br/>
+        <br/>
         <div className="mt-24 max-w-7xl mx-auto px-6">
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -213,9 +264,9 @@ const TopicPage = () => {
         </motion.button>
 
         <div className="mb-8">
-          <div className="text-sm text-stone-600 mb-1">{topicData.courseTitle}</div>
+          <div className="text-sm text-stone-600 mb-1">{topicData?.courseTitle || 'Course'}</div>
           <div className="flex items-center text-stone-800">
-            <div className="text-lg">{topicData.chapterTitle}</div>
+            <div className="text-lg">{topicData?.chapterTitle || 'Chapter'}</div>
             <ChevronRight className="mx-2 h-5 w-5" />
             <div className="text-2xl font-bold">{strippedTopic}</div>
             {topicData.isWeakTopic && (
@@ -233,7 +284,7 @@ const TopicPage = () => {
           className="bg-white/50 rounded-xl p-8 mb-8 shadow-lg border border-stone-300/50 backdrop-blur-sm"
         >
           <div className="prose prose-lg max-w-none text-stone-800">
-            {topicData.enhancedContent ? renderContent(topicData.enhancedContent) : (
+            {topicData?.enhancedContent ? renderContent(topicData.enhancedContent) : (
               <p className="text-stone-600">No enhanced content available.</p>
             )}
           </div>
