@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Clock, ListOrdered, ShieldAlert, Loader2 } from 'lucide-react';
+import { Clock, ListOrdered, ShieldAlert, Loader2, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import Header from './Header';
 
 const TestPage = () => {
@@ -11,27 +12,25 @@ const TestPage = () => {
   const [emojiIndex, setEmojiIndex] = useState(0);
   const [testReady, setTestReady] = useState(false);
   const [status, setStatus] = useState('Generating questions...');
-  const emojis = ["⏳", "🔄", "📝", "⚡", "✅"];
+  const emojis = ["📚", "✍️", "🧠", "⚡", "✅", "🎯", "🔍", "📝", "⏱️", "🏆"];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setEmojiIndex((prev) => (prev + 1) % emojis.length);
-    }, 1000);
+    }, 800); // Slightly faster rotation
 
     return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
-    // Check for required data first
     if (!chapter_ || !userEmail) {
       alert('Missing chapter or email information. Please try again.');
-      navigate('/'); // Redirect to appropriate page
+      navigate('/');
       return;
     }
 
     const prepareTest = async () => {
       try {
-        // Step 1: Generate the test questions (text file)
         setStatus('Generating questions...');
         const response = await fetch('http://localhost:5000/temp_start_bp', {
           method: 'POST',
@@ -39,7 +38,6 @@ const TestPage = () => {
           body: JSON.stringify({ chapter_: chapter_, email: userEmail }),
         });
 
-        // Handle HTTP errors
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.message || 'Failed to start test');
@@ -51,7 +49,6 @@ const TestPage = () => {
           throw new Error(data.message || 'Failed to generate test questions');
         }
         
-        // Step 2: Generate the CSV file
         setStatus('Processing questions...');
         const csvResponse = await fetch('http://localhost:5000/generate_csv', {
           method: 'POST',
@@ -67,7 +64,7 @@ const TestPage = () => {
         const csvData = await csvResponse.json();
         
         if (csvData.success) {
-          setStatus('Test ready!');
+          setStatus('Test ready! 🎉');
           setTestReady(true);
         } else {
           throw new Error(csvData.message || 'Failed to prepare test data');
@@ -79,43 +76,117 @@ const TestPage = () => {
     };
 
     prepareTest();
-  }, [chapter_, userEmail, navigate]); // Added dependencies
+  }, [chapter_, userEmail, navigate]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 text-white p-6">
+    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-stone-100 font-serif relative">
+      {/* Background pattern */}
+      <div className="fixed inset-0 overflow-hidden opacity-10 -z-10 pointer-events-none">
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full bg-stone-400"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              width: `${Math.random() * 60 + 20}px`,
+              height: `${Math.random() * 60 + 20}px`,
+            }}
+            animate={{
+              y: [0, Math.random() * 50 - 25],
+              opacity: [0.05, 0.1, 0.05],
+            }}
+            transition={{
+              duration: Math.random() * 10 + 15,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+          />
+        ))}
+      </div>
+
       <Header />
-      <div className="mt-16 max-w-3xl mx-auto bg-white bg-opacity-10 rounded-lg p-6">
-        <h2 className="text-3xl font-bold mb-4 text-center">Test Instructions</h2>
+      <br/>
+      <br/>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="pt-24 pb-12 px-6 max-w-4xl mx-auto"
+      >
+        <div className="bg-white/50 rounded-xl p-8 shadow-lg border border-stone-300/50 backdrop-blur-sm">
+          <h2 className="text-3xl font-bold mb-6 text-center text-stone-800">
+            Test Instructions 📋
+          </h2>
 
-        <p className="mb-4 flex items-center">
-          <ListOrdered className="h-5 w-5 mr-2 text-yellow-300" /> The test consists of 25 multiple choice questions.
-        </p>
-        <p className="mb-4 flex items-center">
-          <Clock className="h-5 w-5 mr-2 text-blue-300" /> You have 60 mins to complete the test.
-        </p>
-        <p className="mb-6 flex items-center">
-          <ShieldAlert className="h-5 w-5 mr-2 text-red-400" /> The test is proctored. Please do not cheat! 🚫
-        </p>
+          <div className="space-y-4 mb-8">
+            <motion.div 
+              whileHover={{ x: 5 }}
+              className="flex items-start p-4 bg-stone-700/10 rounded-lg border border-stone-700/20"
+            >
+              <span className="text-2xl mr-3">📝</span>
+              <div>
+                <h3 className="font-bold text-stone-800 mb-1">Question Format</h3>
+                <p className="text-stone-700">The test consists of 25 multiple choice questions.</p>
+              </div>
+            </motion.div>
 
-        <div className="flex justify-center">
-          {testReady ? (
-            <button
-              onClick={() => navigate('/taketest')}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded"
+            <motion.div 
+              whileHover={{ x: 5 }}
+              className="flex items-start p-4 bg-stone-700/10 rounded-lg border border-stone-700/20"
             >
-              Take Test
-            </button>
-          ) : (
-            <button
-              disabled
-              className="bg-gray-500 text-white font-bold py-2 px-6 rounded flex items-center space-x-3"
+              <span className="text-2xl mr-3">⏱️</span>
+              <div>
+                <h3 className="font-bold text-stone-800 mb-1">Time Limit</h3>
+                <p className="text-stone-700">You have 60 minutes to complete the test.</p>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              whileHover={{ x: 5 }}
+              className="flex items-start p-4 bg-stone-700/10 rounded-lg border border-stone-700/20"
             >
-              <Loader2 className="h-5 w-5 animate-spin" />
-              <span>{status} {emojis[emojiIndex]}</span>
-            </button>
+              <span className="text-2xl mr-3">👁️</span>
+              <div>
+                <h3 className="font-bold text-stone-800 mb-1">Test Proctoring</h3>
+                <p className="text-stone-700">The test is proctored. Please maintain academic integrity!</p>
+              </div>
+            </motion.div>
+          </div>
+
+          <div className="flex justify-center">
+            {testReady ? (
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => navigate('/taketest')}
+                className="bg-gradient-to-r from-stone-700 to-stone-600 text-amber-50 py-3 px-8 rounded-full text-lg shadow-md flex items-center"
+              >
+                Begin Test <ArrowRight className="ml-2 h-5 w-5" />
+              </motion.button>
+            ) : (
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                disabled
+                className="bg-stone-700/30 text-stone-800 py-3 px-6 rounded-full shadow-inner flex items-center border border-stone-700/30"
+              >
+                <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                <span>{status} <span className="text-xl ml-1">{emojis[emojiIndex]}</span></span>
+              </motion.button>
+            )}
+          </div>
+
+          {testReady && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-6 text-center text-stone-600 text-sm"
+            >
+              <p>Good luck! You've got this! 💪</p>
+            </motion.div>
           )}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
