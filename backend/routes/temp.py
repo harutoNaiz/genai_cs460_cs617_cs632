@@ -47,8 +47,6 @@ def preprocess_questions(file_path, output_csv):
     df.to_csv(output_csv, index=False, encoding='utf-8')
     return df
 
-
-
 def generate_questions(topic, subtopic, model="llama3-70b-8192"):
     prompt = (f"Generate 5 multiple choice questions on {topic} under {subtopic}. "
               "Each question should have 4 options (a, b, c, d) with one correct answer. "

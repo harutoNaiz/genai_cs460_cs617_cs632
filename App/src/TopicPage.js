@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowLeft, FileText, ChevronDown, ChevronUp, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowLeft, FileText, ChevronDown, ChevronUp, ChevronRight, X } from 'lucide-react';
 import Header from './Header';
 
 const TopicPage = () => {
@@ -16,12 +16,13 @@ const TopicPage = () => {
     enhancedContent: '',
     courseTitle: '',
     chapterTitle: '',
-    topicTitle: ''
+    topicTitle: '',
+    isWeakTopic: false
   });
   
   const [summary, setSummary] = useState('');
   const [isSummarizing, setIsSummarizing] = useState(false);
-  const [showSummary, setShowSummary] = useState(false);
+  const [showSummaryModal, setShowSummaryModal] = useState(false);
 
   useEffect(() => {
     if (!userEmail) {
@@ -57,7 +58,7 @@ const TopicPage = () => {
       });
   }, [userEmail, chapterName, topic, navigate]);
 
-  var strippedTopic = topicData.topicTitle.replace('.txt','');
+  const strippedTopic = topicData.topicTitle.replace('.txt','');
 
   const renderContent = (content) => {
     return content.split('\n\n').map((paragraph, index) => {
@@ -101,37 +102,36 @@ const TopicPage = () => {
     navigate('/chapters');
   };
   
-  const handleSummarize = () => {
+  const handleSummarize = async () => {
     if (summary) {
-      setShowSummary(!showSummary);
+      setShowSummaryModal(true);
       return;
     }
     
     setIsSummarizing(true);
     
-    fetch('http://localhost:5000/summarize-content', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
-        content: topicData.enhancedContent 
-      })
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Failed to generate summary');
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setSummary(data.summary);
-        setShowSummary(true);
-        setIsSummarizing(false);
-      })
-      .catch((err) => {
-        console.error('Error generating summary:', err);
-        setError('Failed to generate summary. Please try again.');
-        setIsSummarizing(false);
+    try {
+      const response = await fetch('http://localhost:5000/summarize-content', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          content: topicData.enhancedContent 
+        })
       });
+
+      if (!response.ok) {
+        throw new Error('Failed to generate summary');
+      }
+
+      const data = await response.json();
+      setSummary(data.summary);
+      setShowSummaryModal(true);
+    } catch (err) {
+      console.error('Error generating summary:', err);
+      setError('Failed to generate summary. Please try again.');
+    } finally {
+      setIsSummarizing(false);
+    }
   };
 
   if (isLoading) {
@@ -200,8 +200,6 @@ const TopicPage = () => {
       </div>
 
       <Header />
-      <br/>
-      <br/>
       
       <div className="pt-24 pb-12 px-8 max-w-7xl mx-auto">
         <motion.button
@@ -220,6 +218,11 @@ const TopicPage = () => {
             <div className="text-lg">{topicData.chapterTitle}</div>
             <ChevronRight className="mx-2 h-5 w-5" />
             <div className="text-2xl font-bold">{strippedTopic}</div>
+            {topicData.isWeakTopic && (
+              <span className="ml-3 px-2 py-1 bg-red-100 text-red-800 text-xs font-medium rounded-full">
+                Needs Improvement
+              </span>
+            )}
           </div>
         </div>
 
@@ -234,23 +237,6 @@ const TopicPage = () => {
               <p className="text-stone-600">No enhanced content available.</p>
             )}
           </div>
-
-          {showSummary && summary && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              transition={{ duration: 0.3 }}
-              className="mt-8 p-6 bg-stone-700/10 rounded-lg border border-stone-700/20"
-            >
-              <h3 className="text-xl font-bold mb-4 text-stone-800 flex items-center">
-                <FileText className="h-5 w-5 mr-2" />
-                Summary
-              </h3>
-              <div className="prose prose-lg max-w-none text-stone-700">
-                {renderContent(summary)}
-              </div>
-            </motion.div>
-          )}
         </motion.div>
         
         <div className="flex justify-center">
@@ -266,27 +252,47 @@ const TopicPage = () => {
                 <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-amber-50 mr-2"></div>
                 Summarizing...
               </>
-            ) : summary ? (
-              showSummary ? (
-                <>
-                  <ChevronUp className="h-5 w-5 mr-2" />
-                  Hide Summary
-                </>
-              ) : (
-                <>
-                  <ChevronDown className="h-5 w-5 mr-2" />
-                  Show Summary
-                </>
-              )
             ) : (
               <>
                 <FileText className="h-5 w-5 mr-2" />
-                Summarize Content
+                {summary ? 'Show Summary' : 'Generate Summary'}
               </>
             )}
           </motion.button>
         </div>
       </div>
+
+      {/* Summary Modal */}
+      <AnimatePresence>
+        {showSummaryModal && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className="bg-white/90 rounded-xl p-6 max-w-3xl w-full border border-stone-300/50 backdrop-blur-sm relative"
+            >
+              <button
+                onClick={() => setShowSummaryModal(false)}
+                className="absolute top-4 right-4 text-stone-600 hover:text-stone-800"
+              >
+                <X className="h-6 w-6" />
+              </button>
+              
+              <h3 className="text-2xl font-bold mb-6 flex items-center text-stone-800">
+                <FileText className="h-6 w-6 mr-3" />
+                Summary of {strippedTopic}
+              </h3>
+              
+              <div className="prose prose-lg max-w-none text-stone-700 max-h-[70vh] overflow-y-auto">
+                {summary ? renderContent(summary) : (
+                  <p>No summary available</p>
+                )}
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
