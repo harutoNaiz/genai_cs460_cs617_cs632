@@ -1,305 +1,305 @@
-Here are 5 multiple choice questions on Fundamentals of Operating Systems under Introduction to Operating Systems:
+Here are five multiple-choice questions on Understanding Complexity: Time and Space Analysis, ranging from easy to very hard:
 
 **Question 1**
-What is the main function of an Operating System?
-a. To perform arithmetic operations
-b. To manage hardware and software resources
-c. To develop applications
-d. To connect devices to the internet
+What is the purpose of time complexity analysis in algorithms?
+a. To measure the space required by an algorithm.
+b. To determine the best-case scenario of an algorithm.
+c. To evaluate the performance of an algorithm.
+d. To compare the efficiency of different algorithms.
 
-**Correct answer: b. To manage hardware and software resources**
-**Subtopic: Operating System Definition**
-**What in that subtopic exactly: Role of OS**
+**Correct answer: d. To compare the efficiency of different algorithms.**
+**Subtopic: Time Complexity**
+**What in that subtopic exactly: Definition and Purpose of Time Complexity**
 **Difficulty: e**
 
 **Question 2**
-Which of the following is NOT a characteristic of an Operating System?
-a. Portability
-b. Security
-c. Efficiency
-d. Compiler
+What does the Big O notation represent in time complexity analysis?
+a. The average case scenario of an algorithm.
+b. The worst-case scenario of an algorithm.
+c. The best-case scenario of an algorithm.
+d. The exact number of operations performed by an algorithm.
 
-**Correct answer: d. Compiler**
-**Subtopic: Operating System Characteristics**
-**What in that subtopic exactly: Key Features of OS**
+**Correct answer: b. The worst-case scenario of an algorithm.**
+**Subtopic: Big O Notation**
+**What in that subtopic exactly: Definition and Representation**
 **Difficulty: m**
 
 **Question 3**
-What is the term for the programs that manage the interaction between the user and the computer hardware?
-a. Device drivers
-b. System calls
-c. Interrupt handlers
-d. User-space programs
+A certain algorithm has a time complexity of O(n^2). What happens to the running time if the input size is quadrupled?
+a. The running time increases by a factor of 4.
+b. The running time increases by a factor of 16.
+c. The running time increases by a factor of 8.
+d. The running time remains unchanged.
 
-**Correct answer: a. Device drivers**
-**Subtopic: OS Components**
-**What in that subtopic exactly: Device Management**
+**Correct answer: b. The running time increases by a factor of 16.**
+**Subtopic: Time Complexity**
+**What in that subtopic exactly: Implications of Quadrupling Input Size**
 **Difficulty: m**
 
 **Question 4**
-What is the concept of allowing multiple programs to share the CPU time, where each program is executed for a short period of time?
-a. Multithreading
-b. Multiprocessing
-c. Time sharing
-d. Virtual memory
+Consider two algorithms, Algorithm A with a time complexity of O(n) and Algorithm B with a time complexity of O(log n). Which algorithm will have a faster running time for large inputs?
+a. Algorithm A
+b. Algorithm B
+c. Both algorithms will have the same running time.
+d. It depends on the specific inputs.
 
-**Correct answer: c. Time sharing**
-**Subtopic: Types of Operating Systems**
-**What in that subtopic exactly: Time-sharing Systems**
+**Correct answer: b. Algorithm B**
+**Subtopic: Time Complexity Comparison**
+**What in that subtopic exactly: Comparing Running Times**
 **Difficulty: h**
 
 **Question 5**
-What is the term for the technique of dividing the physical memory into small, fixed-size blocks to allocate memory to processes?
-a. Fragmentation
-b. Paging
-c. Segmentation
-d. Swapping
+Suppose an algorithm has a time complexity of O(2^n). What is the approximate running time if the input size is increased from 10 to 20?
+a. The running time increases by a factor of 2^10.
+b. The running time increases by a factor of 1024.
+c. The running time increases by a factor of 2^20.
+d. The running time remains unchanged.
 
-**Correct answer: b. Paging**
-**Subtopic: Memory Management**
-**What in that subtopic exactly: Memory Allocation Techniques**
+**Correct answer: b. The running time increases by a factor of 1024.**
+**Subtopic: Exponential Time Complexity**
+**What in that subtopic exactly: Implications of Exponential Growth**
 **Difficulty: h**
-Here are 5 multiple-choice questions on Fundamentals of Operating Systems under Operating System Architecture:
+Here are the 5 multiple choice questions on Arrays and Linked Lists:
 
 **Question 1**
-What is the primary function of an Operating System?
-a. To manage computer hardware.
-b. To develop application software.
-c. To connect to the internet.
-d. To perform arithmetic operations.
+What is the basic data structure that stores a collection of elements, each identified by an array index or key?
+a. Linked List
+b. Array
+c. Stack
+d. Queue
 
-**Correct answer: a. To manage computer hardware.**
-**Subtopic: Introduction to Operating Systems**
-**What in that subtopic exactly: Role of Operating System**
+**Correct answer: b. Array**
+**Subtopic: Arrays**
+**What in that subtopic exactly: Definition of Array**
 **Difficulty: e**
 
 **Question 2**
-Which of the following is a characteristic of a Multiprogramming Operating System?
-a. One program executes at a time.
-b. Multiple programs execute concurrently.
-c. The OS manages only one type of resource.
-d. The OS is responsible for connecting devices.
+What is the time complexity of accessing an element in an array by its index?
+a. O(n)
+b. O(log n)
+c. O(1)
+d. O(n^2)
 
-**Correct answer: b. Multiple programs execute concurrently.**
-**Subtopic: Types of Operating Systems**
-**What in that subtopic exactly: Characteristics of Multiprogramming**
+**Correct answer: c. O(1)**
+**Subtopic: Arrays**
+**What in that subtopic exactly: Time Complexity of Array Operations**
 **Difficulty: m**
 
 **Question 3**
-What is the main goal of a Process Scheduler in an Operating System?
-a. To allocate memory to processes.
-b. To manage file input/output operations.
-c. To allocate CPU time to processes.
-d. To manage network connections.
+In a linked list, what is the primary purpose of the "next" pointer?
+a. To store the data element
+b. To point to the previous node
+c. To point to the next node
+d. To store the index of the node
 
-**Correct answer: c. To allocate CPU time to processes.**
-**Subtopic: Process Management**
-**What in that subtopic exactly: Role of Process Scheduler**
+**Correct answer: c. To point to the next node**
+**Subtopic: Linked Lists**
+**What in that subtopic exactly: Structure of a Linked List Node**
 **Difficulty: m**
 
 **Question 4**
-In an Interrupt-Driven I/O architecture, what triggers an interrupt?
-a. Completion of I/O operation.
-b. Arrival of I/O request.
-c. Execution of an instruction.
-d. Termination of a process.
+What is the primary advantage of using a linked list over an array when frequent insertions and deletions are required?
+a. Faster access time
+b. More efficient use of memory
+c. Easier implementation of algorithms
+d. Dynamic size allocation
 
-**Correct answer: a. Completion of I/O operation.**
-**Subtopic: I/O Management**
-**What in that subtopic exactly: Interrupt-Driven I/O**
+**Correct answer: d. Dynamic size allocation**
+**Subtopic: Linked Lists vs Arrays**
+**What in that subtopic exactly: Advantages of Linked Lists**
 **Difficulty: h**
 
 **Question 5**
-What is the primary benefit of using a Microkernel Architecture in Operating System design?
-a. Improved process scheduling.
-b. Enhanced I/O management.
-c. Better support for multiprocessing.
-d. Increased modularity and scalability.
+Suppose we have a linked list with n nodes, and we want to insert a new node at the k-th position. What is the time complexity of this operation in the worst case?
+a. O(k)
+b. O(n)
+c. O(n-k)
+d. O(n+k)
 
-**Correct answer: d. Increased modularity and scalability.**
-**Subtopic: Operating System Architecture**
-**What in that subtopic exactly: Microkernel Architecture**
+**Correct answer: b. O(n)**
+**Subtopic: Linked Lists**
+**What in that subtopic exactly: Time Complexity of Linked List Operations**
 **Difficulty: h**
-Here are 5 multiple choice questions on Fundamentals of Operating Systems under Processes and Threads:
+Here are 5 multiple choice questions on 1_Foundations of Data Structures under Stacks and Queues: Managing Data in an Ordered Manner:
 
 **Question 1**
-What is a process in the context of operating systems?
-a. A program in execution with its own memory space.
-b. A thread of execution within a program.
-c. A type of data structure used in scheduling.
-d. A way of inter-process communication.
+What is the primary purpose of a queue data structure?
+a. To store data in a random order.
+b. To implement recursion.
+c. To follow the FIFO (First-In-First-Out) principle.
+d. To search for a specific element.
 
-**Correct answer: a. A program in execution with its own memory space.**
-**Subtopic: Process**
-**What in that subtopic exactly: Definition of Process**
+**Correct answer: c. To follow the FIFO (First-In-First-Out) principle.**
+**Subtopic: Queue**
+**What in that subtopic exactly: Definition of a Queue**
 **Difficulty: e**
 
 **Question 2**
-Which of the following is a characteristic of a thread?
-a. It has its own memory space.
-b. It has its own program counter.
-c. It has its own CPU.
-d. It shares memory with other threads.
+Which operation is not performed on a stack?
+a. Push
+b. Pop
+c. Traverse
+d. Sort
 
-**Correct answer: d. It shares memory with other threads.**
-**Subtopic: Threads**
-**What in that subtopic exactly: Characteristics of Threads**
+**Correct answer: d. Sort**
+**Subtopic: Stack Operations**
+**What in that subtopic exactly: Basic Stack Operations**
 **Difficulty: m**
 
 **Question 3**
-What is the main difference between a process and a thread?
-a. A process is smaller than a thread.
-b. A process has its own memory space, whereas a thread shares memory.
-c. A process is used for I/O operations, whereas a thread is used for CPU-intensive tasks.
-d. A process is used for multi-programming, whereas a thread is used for multi-threading.
+What is the time complexity of the enqueue operation in a queue implemented using a linked list?
+a. O(1)
+b. O(n)
+c. O(log n)
+d. O(n^2)
 
-**Correct answer: b. A process has its own memory space, whereas a thread shares memory.**
-**Subtopic: Process vs Thread**
-**What in that subtopic exactly: Difference between Process and Thread**
+**Correct answer: a. O(1)**
+**Subtopic: Queue Implementation**
+**What in that subtopic exactly: Time Complexity of Enqueue Operation**
 **Difficulty: m**
 
 **Question 4**
-What is the purpose of the PCB (Process Control Block)?
-a. To manage memory allocation for a process.
-b. To schedule processes.
-c. To maintain information about a process.
-d. To facilitate communication between processes.
+Suppose we have a stack of integers, and we want to find the maximum element in the stack. Which of the following approaches is most efficient?
+a. Pop each element from the stack and compare it with the current maximum.
+b. Iterate through the stack from top to bottom.
+c. Use a recursive function to find the maximum element.
+d. Use a secondary stack to store the maximum elements.
 
-**Correct answer: c. To maintain information about a process.**
-**Subtopic: Process Control Block**
-**What in that subtopic exactly: Function of PCB**
-**Difficulty: m**
+**Correct answer: a. Pop each element from the stack and compare it with the current maximum.**
+**Subtopic: Stack Applications**
+**What in that subtopic exactly: Finding Maximum Element in a Stack**
+**Difficulty: h**
 
 **Question 5**
-What is the term for the process of creating a new process from an existing one?
-a. Process migration.
-b. Process scheduling.
-c. Process synchronization.
-d. Processforking.
+Consider a queue implemented using a circular array of size n. What is the condition for checking if the queue is full?
+a. (rear+1)%n == front
+b. rear == front
+c. (rear+1)%n == (front-1)%n
+d. rear == (front+1)%n
 
-**Correct answer: d. Process forking.**
-**Subtopic: Process Creation**
-**What in that subtopic exactly: Process Forking**
+**Correct answer: a. (rear+1)%n == front**
+**Subtopic: Queue Implementation**
+**What in that subtopic exactly: Checking if Queue is Full in Circular Array**
 **Difficulty: h**
-Here are five multiple-choice questions on System Calls and APIs under Fundamentals of Operating Systems:
+Here are five multiple-choice questions on Hashing: Efficient Data Retrieval using Hash Tables:
 
 **Question 1**
-What is the primary purpose of system calls in an operating system?
-a. To manage memory allocation
-b. To provide a interface between the OS and application programs
-c. To handle hardware interrupts
-d. To schedule processes
+What is the primary purpose of a hash function in a hash table?
+a. To store data in the table
+b. To retrieve data from the table
+c. To map a key to an index in the table
+d. To sort data in the table
 
-**Correct answer: b. To provide a interface between the OS and application programs**
-**Subtopic: System Calls**
-**What in that subtopic exactly: Purpose of System Calls**
+**Correct answer: c. To map a key to an index in the table**
+**Subtopic: Hash Functions**
+**What in that subtopic exactly: Definition and Purpose of Hash Functions**
 **Difficulty: e**
 
 **Question 2**
-Which of the following is an example of a process control system call?
-a. read()
-b. fork()
-c. printf()
-d. malloc()
+Which of the following is a common technique used to handle collisions in a hash table?
+a. Chaining
+b. Open Addressing
+c. Bubble Sort
+d. Quick Sort
 
-**Correct answer: b. fork()**
-**Subtopic: System Calls**
-**What in that subtopic exactly: Process Control System Calls**
+**Correct answer: a. Chaining**
+**Subtopic: Collision Resolution**
+**What in that subtopic exactly: Techniques for Handling Collisions**
 **Difficulty: m**
 
 **Question 3**
-What is the difference between a system call and an API?
-a. A system call is a set of libraries, while an API is a set of rules
-b. A system call is a function, while an API is a set of functions
-c. A system call provides a interface to the OS, while an API provides a interface to a software application
-d. A system call is used for user-level interactions, while an API is used for kernel-level interactions
+What is the primary advantage of using open addressing over chaining in a hash table?
+a. It reduces memory usage
+b. It improves cache locality
+c. It increases search times
+d. It decreases insertion times
 
-**Correct answer: c. A system call provides a interface to the OS, while an API provides a interface to a software application**
-**Subtopic: APIs**
-**What in that subtopic exactly: Difference between System Calls and APIs**
+**Correct answer: b. It improves cache locality**
+**Subtopic: Open Addressing**
+**What in that subtopic exactly: Advantages of Open Addressing**
 **Difficulty: m**
 
 **Question 4**
-Which of the following system calls is used to request a service from the operating system that is not related to process management or file management?
-a. fork()
-b. exec()
-c. wait()
-d. ioctl()
+Consider a hash table with a load factor of 0.8. Which of the following statements is true?
+a. The table is underfull
+b. The table is at maximum capacity
+c. The table is experiencing collisions
+d. The table is 80% empty
 
-**Correct answer: d. ioctl()**
-**Subtopic: System Calls**
-**What in that subtopic exactly: Device Management System Calls**
+**Correct answer: c. The table is experiencing collisions**
+**Subtopic: Load Factor and Resizing**
+**What in that subtopic exactly: Load Factor and Collision Rate**
 **Difficulty: h**
 
 **Question 5**
-What is the name of the table that maps a system call number to the corresponding kernel function in a Unix-like operating system?
-a. System Call Vector
-b. System Call Table
-c. Kernel Function Table
-d. syscall vector
+Suppose a hash function is designed such that it uses the ASCII values of the characters in a string to compute the hash code. What is a potential problem with this approach?
+a. It is prone to collisions
+b. It is not platform-independent
+c. It is sensitive to string length
+d. It is sensitive to character order
 
-**Correct answer: d. syscall vector**
-**Subtopic: System Calls**
-**What in that subtopic exactly: System Call Implementation**
+**Correct answer: a. It is prone to collisions**
+**Subtopic: Hash Function Design**
+**What in that subtopic exactly: Pitfalls in Hash Function Design**
 **Difficulty: h**
-Here are five multiple choice questions on Fundamentals of Operating Systems under Interrupts and Scheduling:
+Here are 5 multiple-choice questions on Recursion and Backtracking:
 
 **Question 1**
-What is an interrupt in the context of Operating Systems?
-a. A routine that performs a specific task
-b. A signal to the CPU to stop executing the current process
-c. A way to allocate memory to a process
-d. A technique to avoid deadlock
+What is the basic idea behind recursion?
+a. Breaking down a problem into smaller sub-problems.
+b. Solving a problem using a loop.
+c. Using a data structure to store results.
+d. Avoiding function calls.
 
-**Correct answer: b. A signal to the CPU to stop executing the current process**
-**Subtopic: Interrupts**
-**What in that subtopic exactly: Definition of Interrupts**
+**Correct answer: a. Breaking down a problem into smaller sub-problems.**
+**Subtopic: Recursion Basics**
+**What in that subtopic exactly: Definition of Recursion**
 **Difficulty: e**
 
 **Question 2**
-Which of the following is a type of interrupt?
-a. Programmed I/O
-b. Vectored Interrupt
-c. Spooling
-d. Buffering
+Which of the following is a requirement for a recursive function?
+a. The function must have multiple parameters.
+b. The function must have a loop.
+c. The function must have a base case.
+d. The function must return a value.
 
-**Correct answer: b. Vectored Interrupt**
-**Subtopic: Interrupts**
-**What in that subtopic exactly: Types of Interrupts**
+**Correct answer: c. The function must have a base case.**
+**Subtopic: Recursive Functions**
+**What in that subtopic exactly: Characteristics of Recursive Functions**
 **Difficulty: m**
 
 **Question 3**
-In Round Robin Scheduling, what is the function of the timer?
-a. To allocate memory to a process
-b. To switch between processes
-c. To terminate a process
-d. To interrupt the current process
+What is the term for the process of returning from a recursive function call?
+a. Invocation
+b. Termination
+c. Unwinding
+d. Iteration
 
-**Correct answer: d. To interrupt the current process**
-**Subtopic: Scheduling Algorithms**
-**What in that subtopic exactly: Round Robin Scheduling**
+**Correct answer: c. Unwinding**
+**Subtopic: Recursive Function Calls**
+**What in that subtopic exactly: Recursive Function Call Process**
 **Difficulty: m**
 
 **Question 4**
-What is the main advantage of using multi-level feedback queues in scheduling?
-a. It minimizes the average waiting time
-b. It maximizes the throughput
-c. It is highly flexible and can be tailored to different system requirements
-d. It is the simplest scheduling algorithm
+Which of the following data structures is commonly used to implement backtracking algorithms?
+a. Stacks
+b. Queues
+c. Trees
+d. Graphs
 
-**Correct answer: c. It is highly flexible and can be tailored to different system requirements**
-**Subtopic: Scheduling Algorithms**
-**What in that subtopic exactly: Multilevel Feedback Queues**
+**Correct answer: a. Stacks**
+**Subtopic: Backtracking Algorithms**
+**What in that subtopic exactly: Implementing Backtracking Algorithms**
 **Difficulty: h**
 
 **Question 5**
-In the context of Scheduling, what is the main difference between a process and a thread?
-a. A process has its own memory space, while a thread shares it with other threads
-b. A thread has its own memory space, while a process shares it with other processes
-c. A process has higher priority than a thread
-d. A thread has higher priority than a process
+What is the purpose of the "unchoosing" step in a backtracking algorithm?
+a. To undo the last choice made.
+b. To make a new choice.
+c. To store the solution.
+d. To terminate the algorithm.
 
-**Correct answer: a. A process has its own memory space, while a thread shares it with other threads**
-**Subtopic: Process Management**
-**What in that subtopic exactly: Processes and Threads**
+**Correct answer: a. To undo the last choice made.**
+**Subtopic: Backtracking Algorithms**
+**What in that subtopic exactly: Unchoosing in Backtracking Algorithms**
 **Difficulty: h**

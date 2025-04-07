@@ -134,7 +134,7 @@ def start_test():
             return jsonify({"error": "No course found for user"}), 404
 
         current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        content_path = os.path.join(current_dir, '..', 'content/sort', course)
+        content_path = os.path.join(current_dir, '..', 'content', course)
         
         if not os.path.exists(content_path):
             return jsonify({"error": f"Course directory '{course}' does not exist"}), 404

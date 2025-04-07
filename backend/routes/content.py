@@ -36,7 +36,7 @@ def get_chapters():
         # 3. Build the path to the content/<course> directory
         # Fix the path resolution to correctly find the content directory
         current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        content_path = os.path.join(current_dir, '..', 'content/sort', course)
+        content_path = os.path.join(current_dir, '..', 'content', course)
         
         print(f"Looking for content at: {content_path}")  # Debugging
 
