@@ -1,80 +1,80 @@
-Here are five multiple-choice questions on Understanding Complexity: Time and Space Analysis, ranging from easy to very hard:
+Here are 5 multiple choice questions on 1_Foundations of Data Structures under Understanding Complexity: Time and Space Analysis:
 
 **Question 1**
-What is the purpose of time complexity analysis in algorithms?
-a. To measure the space required by an algorithm.
-b. To determine the best-case scenario of an algorithm.
-c. To evaluate the performance of an algorithm.
-d. To compare the efficiency of different algorithms.
+What is the objective of time complexity analysis?
+a. To measure the amount of memory used by an algorithm.
+b. To compare the efficiency of different algorithms.
+c. To determine the best data structure for an application.
+d. To predict the exact time taken by an algorithm.
 
-**Correct answer: d. To compare the efficiency of different algorithms.**
-**Subtopic: Time Complexity**
-**What in that subtopic exactly: Definition and Purpose of Time Complexity**
+**Correct answer: b. To compare the efficiency of different algorithms.**
+**Subtopic: Time Complexity Analysis**
+**What in that subtopic exactly: Purpose of Time Complexity Analysis**
 **Difficulty: e**
 
 **Question 2**
-What does the Big O notation represent in time complexity analysis?
-a. The average case scenario of an algorithm.
-b. The worst-case scenario of an algorithm.
-c. The best-case scenario of an algorithm.
-d. The exact number of operations performed by an algorithm.
+What is the time complexity of the following loop: for(i=0; i<n; i++) {for(j=0; j<n; j++) {...}}
+a. O(n)
+b. O(n^2)
+c. O(2^n)
+d. O(n^3)
 
-**Correct answer: b. The worst-case scenario of an algorithm.**
-**Subtopic: Big O Notation**
-**What in that subtopic exactly: Definition and Representation**
+**Correct answer: b. O(n^2)**
+**Subtopic: Time Complexity Analysis**
+**What in that subtopic exactly: Analyzing Nested Loops**
 **Difficulty: m**
 
 **Question 3**
-A certain algorithm has a time complexity of O(n^2). What happens to the running time if the input size is quadrupled?
-a. The running time increases by a factor of 4.
-b. The running time increases by a factor of 16.
-c. The running time increases by a factor of 8.
-d. The running time remains unchanged.
+Suppose we have an algorithm with a time complexity of O(n^2) and a space complexity of O(1). What can we say about the algorithm?
+a. It uses a lot of extra memory as the input size increases.
+b. The time taken increases linearly with the input size.
+c. The algorithm is efficient even for large inputs.
+d. The time taken remains constant even for large inputs.
 
-**Correct answer: b. The running time increases by a factor of 16.**
-**Subtopic: Time Complexity**
-**What in that subtopic exactly: Implications of Quadrupling Input Size**
+**Correct answer: c. The algorithm is efficient even for large inputs.**
+**Subtopic: Space Complexity Analysis**
+**What in that subtopic exactly: Analyzing Trade-offs between Time and Space Complexity**
 **Difficulty: m**
 
 **Question 4**
-Consider two algorithms, Algorithm A with a time complexity of O(n) and Algorithm B with a time complexity of O(log n). Which algorithm will have a faster running time for large inputs?
-a. Algorithm A
-b. Algorithm B
-c. Both algorithms will have the same running time.
-d. It depends on the specific inputs.
+What is the time complexity of the following recursive function: T(n) = 2T(n/2) + O(1)?
+a. O(n)
+b. O(log n)
+c. O(n log n)
+d. O(2^n)
 
-**Correct answer: b. Algorithm B**
-**Subtopic: Time Complexity Comparison**
-**What in that subtopic exactly: Comparing Running Times**
+**Correct answer: c. O(n log n)**
+**Subtopic: Time Complexity Analysis of Recursive Functions**
+**What in that subtopic exactly: Master Theorem**
 **Difficulty: h**
 
 **Question 5**
-Suppose an algorithm has a time complexity of O(2^n). What is the approximate running time if the input size is increased from 10 to 20?
-a. The running time increases by a factor of 2^10.
-b. The running time increases by a factor of 1024.
-c. The running time increases by a factor of 2^20.
-d. The running time remains unchanged.
+Suppose we have a recursive algorithm with a time complexity of T(n) = T(n-1) + O(1). How does the time complexity of this algorithm change as the input size increases?
+a. The time complexity increases exponentially with the input size.
+b. The time complexity increases linearly with the input size.
+c. The time complexity decreases exponentially with the input size.
+d. The time complexity remains constant even for large inputs.
 
-**Correct answer: b. The running time increases by a factor of 1024.**
-**Subtopic: Exponential Time Complexity**
-**What in that subtopic exactly: Implications of Exponential Growth**
+**Correct answer: a. The time complexity increases exponentially with the input size.**
+**Subtopic: Time Complexity Analysis of Recursive Functions**
+**What in that subtopic exactly: Analyzing Recursive Functions with Exponential Time Complexity**
 **Difficulty: h**
-Here are the 5 multiple choice questions on Arrays and Linked Lists:
+Here are 5 multiple choice questions on 1_Foundations of Data Structures under Arrays and Linked Lists:
 
 **Question 1**
-What is the basic data structure that stores a collection of elements, each identified by an array index or key?
-a. Linked List
-b. Array
-c. Stack
-d. Queue
+What is the primary way to access elements in an array?
+a. Using a pointer
+b. Using an index
+c. Using a reference
+d. Using a key
 
-**Correct answer: b. Array**
+**Correct answer: b. Using an index**
 **Subtopic: Arrays**
-**What in that subtopic exactly: Definition of Array**
+**What in that subtopic exactly: Accessing Elements in an Array**
 **Difficulty: e**
 
 **Question 2**
-What is the time complexity of accessing an element in an array by its index?
+What is the time complexity of accessing an element in an array?
 a. O(n)
 b. O(log n)
 c. O(1)
@@ -86,220 +86,220 @@ d. O(n^2)
 **Difficulty: m**
 
 **Question 3**
-In a linked list, what is the primary purpose of the "next" pointer?
-a. To store the data element
-b. To point to the previous node
-c. To point to the next node
-d. To store the index of the node
+What is the primary advantage of using a linked list over an array?
+a. Faster access time
+b. Better cache performance
+c. Dynamic memory allocation
+d. Easier implementation
 
-**Correct answer: c. To point to the next node**
+**Correct answer: c. Dynamic memory allocation**
 **Subtopic: Linked Lists**
-**What in that subtopic exactly: Structure of a Linked List Node**
+**What in that subtopic exactly: Advantages of Linked Lists**
 **Difficulty: m**
 
 **Question 4**
-What is the primary advantage of using a linked list over an array when frequent insertions and deletions are required?
-a. Faster access time
-b. More efficient use of memory
-c. Easier implementation of algorithms
-d. Dynamic size allocation
+What is the time complexity of inserting an element at the beginning of a singly linked list?
+a. O(n)
+b. O(log n)
+c. O(1)
+d. O(n^2)
 
-**Correct answer: d. Dynamic size allocation**
-**Subtopic: Linked Lists vs Arrays**
-**What in that subtopic exactly: Advantages of Linked Lists**
-**Difficulty: h**
+**Correct answer: c. O(1)**
+**Subtopic: Linked Lists**
+**What in that subtopic exactly: Time Complexity of Linked List Operations**
+**Difficulty: m**
 
 **Question 5**
-Suppose we have a linked list with n nodes, and we want to insert a new node at the k-th position. What is the time complexity of this operation in the worst case?
+Suppose we have a linked list with nodes of size k, and we want to merge two sorted linked lists. What is the time complexity of this operation?
 a. O(k)
 b. O(n)
-c. O(n-k)
-d. O(n+k)
+c. O(n log k)
+d. O(n/k)
 
 **Correct answer: b. O(n)**
 **Subtopic: Linked Lists**
-**What in that subtopic exactly: Time Complexity of Linked List Operations**
+**What in that subtopic exactly: Merging Sorted Linked Lists**
 **Difficulty: h**
-Here are 5 multiple choice questions on 1_Foundations of Data Structures under Stacks and Queues: Managing Data in an Ordered Manner:
+Here are five multiple-choice questions on Stacks and Queues: Managing Data in an Ordered Manner, ranging from easy to hard:
 
 **Question 1**
-What is the primary purpose of a queue data structure?
+What is the primary purpose of a stack data structure?
 a. To store data in a random order.
-b. To implement recursion.
-c. To follow the FIFO (First-In-First-Out) principle.
-d. To search for a specific element.
+b. To store and retrieve data in a Last-In-First-Out (LIFO) manner.
+c. To sort data in ascending order.
+d. To search for a specific data element.
 
-**Correct answer: c. To follow the FIFO (First-In-First-Out) principle.**
-**Subtopic: Queue**
-**What in that subtopic exactly: Definition of a Queue**
+**Correct answer: b. To store and retrieve data in a Last-In-First-Out (LIFO) manner.**
+**Subtopic: Stacks**
+**What in that subtopic exactly: Definition and Purpose of Stacks**
 **Difficulty: e**
 
 **Question 2**
-Which operation is not performed on a stack?
-a. Push
-b. Pop
-c. Traverse
-d. Sort
+What is the advantage of using a queue data structure over a stack?
+a. It allows for faster insertion and deletion operations.
+b. It provides more flexibility in data retrieval.
+c. It uses less memory space.
+d. It allows for random access to elements.
 
-**Correct answer: d. Sort**
-**Subtopic: Stack Operations**
-**What in that subtopic exactly: Basic Stack Operations**
+**Correct answer: b. It provides more flexibility in data retrieval.**
+**Subtopic: Queues vs. Stacks**
+**What in that subtopic exactly: Differences between Queues and Stacks**
 **Difficulty: m**
 
 **Question 3**
-What is the time complexity of the enqueue operation in a queue implemented using a linked list?
-a. O(1)
-b. O(n)
-c. O(log n)
-d. O(n^2)
+In a queue implementation using an array, what is the purpose of the 'rear' variable?
+a. To keep track of the front element of the queue.
+b. To indicate the empty space at the end of the queue.
+c. To point to the next available position for insertion.
+d. To store the size of the queue.
 
-**Correct answer: a. O(1)**
-**Subtopic: Queue Implementation**
-**What in that subtopic exactly: Time Complexity of Enqueue Operation**
+**Correct answer: c. To point to the next available position for insertion.**
+**Subtopic: Array Implementation of Queues**
+**What in that subtopic exactly: Queue Variables and Their Roles**
 **Difficulty: m**
 
 **Question 4**
-Suppose we have a stack of integers, and we want to find the maximum element in the stack. Which of the following approaches is most efficient?
-a. Pop each element from the stack and compare it with the current maximum.
-b. Iterate through the stack from top to bottom.
-c. Use a recursive function to find the maximum element.
-d. Use a secondary stack to store the maximum elements.
+Consider a scenario where you need to implement a undo/redo feature in a text editor. Which data structure would be most suitable for this purpose?
+a. Stack
+b. Queue
+c. Linked List
+d. Binary Tree
 
-**Correct answer: a. Pop each element from the stack and compare it with the current maximum.**
-**Subtopic: Stack Applications**
-**What in that subtopic exactly: Finding Maximum Element in a Stack**
+**Correct answer: a. Stack**
+**Subtopic: Real-World Applications of Stacks**
+**What in that subtopic exactly: Using Stacks for Undo/Redo Operations**
 **Difficulty: h**
 
 **Question 5**
-Consider a queue implemented using a circular array of size n. What is the condition for checking if the queue is full?
-a. (rear+1)%n == front
-b. rear == front
-c. (rear+1)%n == (front-1)%n
-d. rear == (front+1)%n
+Suppose you have a stack implementation with the following operations: push(x), pop(), isEmpty(), andpeek(). Which operation has a time complexity of O(1)?
+a. push(x)
+b. pop()
+c. peek()
+d. All of the above
 
-**Correct answer: a. (rear+1)%n == front**
-**Subtopic: Queue Implementation**
-**What in that subtopic exactly: Checking if Queue is Full in Circular Array**
+**Correct answer: d. All of the above**
+**Subtopic: Time and Space Complexity of Stack Operations**
+**What in that subtopic exactly: Analysis of Stack Operations**
 **Difficulty: h**
-Here are five multiple-choice questions on Hashing: Efficient Data Retrieval using Hash Tables:
+Here are 5 multiple choice questions on Hashing: Efficient Data Retrieval using Hash Tables, ranging from easy to very hard:
 
 **Question 1**
-What is the primary purpose of a hash function in a hash table?
-a. To store data in the table
-b. To retrieve data from the table
-c. To map a key to an index in the table
-d. To sort data in the table
+What is the main purpose of a hash function in a hash table?
+a. To store data in a linear array.
+b. To search for a specific data element.
+c. To map a key to a specific index.
+d. To sort data in ascending order.
 
-**Correct answer: c. To map a key to an index in the table**
+**Correct answer: c. To map a key to a specific index.**
 **Subtopic: Hash Functions**
-**What in that subtopic exactly: Definition and Purpose of Hash Functions**
+**What in that subtopic exactly: Definition of Hash Function**
 **Difficulty: e**
 
 **Question 2**
-Which of the following is a common technique used to handle collisions in a hash table?
-a. Chaining
-b. Open Addressing
-c. Bubble Sort
-d. Quick Sort
+Which of the following is a characteristic of a good hash function?
+a. It always generates the same index for different keys.
+b. It generates a fixed-size output.
+c. It is slow and inefficient.
+d. It only works for integer keys.
 
-**Correct answer: a. Chaining**
-**Subtopic: Collision Resolution**
-**What in that subtopic exactly: Techniques for Handling Collisions**
+**Correct answer: b. It generates a fixed-size output.**
+**Subtopic: Hash Functions**
+**What in that subtopic exactly: Properties of Good Hash Function**
 **Difficulty: m**
 
 **Question 3**
-What is the primary advantage of using open addressing over chaining in a hash table?
-a. It reduces memory usage
-b. It improves cache locality
-c. It increases search times
-d. It decreases insertion times
+What is the term for the process of resolving collisions in a hash table?
+a. Hashing
+b. Colliding
+c. Chaining
+d. Indexing
 
-**Correct answer: b. It improves cache locality**
-**Subtopic: Open Addressing**
-**What in that subtopic exactly: Advantages of Open Addressing**
+**Correct answer: c. Chaining**
+**Subtopic: Collision Resolution**
+**What in that subtopic exactly: Methods of Collision Resolution**
 **Difficulty: m**
 
 **Question 4**
-Consider a hash table with a load factor of 0.8. Which of the following statements is true?
-a. The table is underfull
-b. The table is at maximum capacity
-c. The table is experiencing collisions
-d. The table is 80% empty
+Suppose we have a hash table with a load factor of 0.8. What can we conclude about the table?
+a. The table is full and cannot accept more elements.
+b. The table is empty and no elements have been inserted.
+c. The table has 80% of its slots occupied.
+d. The table has 80% of its slots empty.
 
-**Correct answer: c. The table is experiencing collisions**
-**Subtopic: Load Factor and Resizing**
-**What in that subtopic exactly: Load Factor and Collision Rate**
+**Correct answer: c. The table has 80% of its slots occupied.**
+**Subtopic: Hash Table Operations**
+**What in that subtopic exactly: Load Factor and its Implications**
 **Difficulty: h**
 
 **Question 5**
-Suppose a hash function is designed such that it uses the ASCII values of the characters in a string to compute the hash code. What is a potential problem with this approach?
-a. It is prone to collisions
-b. It is not platform-independent
-c. It is sensitive to string length
-d. It is sensitive to character order
+Consider a hash table with open addressing and linear probing. If the table has a size of 10 and we insert 5 elements with keys 0, 1, 2, 3, and 4, what is the probability that the next element with key 5 will collide with an existing element?
+a. 0.1
+b. 0.5
+c. 0.7
+d. 1.0
 
-**Correct answer: a. It is prone to collisions**
-**Subtopic: Hash Function Design**
-**What in that subtopic exactly: Pitfalls in Hash Function Design**
+**Correct answer: b. 0.5**
+**Subtopic: Collision Resolution**
+**What in that subtopic exactly: Analysis of Open Addressing with Linear Probing**
 **Difficulty: h**
-Here are 5 multiple-choice questions on Recursion and Backtracking:
+Here are five multiple-choice questions on Recursion and Backtracking:
 
 **Question 1**
-What is the basic idea behind recursion?
-a. Breaking down a problem into smaller sub-problems.
-b. Solving a problem using a loop.
-c. Using a data structure to store results.
-d. Avoiding function calls.
+What is a recursive function?
+a. A function that takes two inputs.
+b. A function that calls itself.
+c. A function that never ends.
+d. A function that returns a pointer.
 
-**Correct answer: a. Breaking down a problem into smaller sub-problems.**
-**Subtopic: Recursion Basics**
+**Correct answer: b. A function that calls itself.**
+**Subtopic: Basics of Recursion**
 **What in that subtopic exactly: Definition of Recursion**
 **Difficulty: e**
 
 **Question 2**
-Which of the following is a requirement for a recursive function?
-a. The function must have multiple parameters.
-b. The function must have a loop.
-c. The function must have a base case.
-d. The function must return a value.
+In a recursive function, what is the role of the base case?
+a. To make the recursive call.
+b. To calculate the result.
+c. To stop the recursion.
+d. To optimize the function.
 
-**Correct answer: c. The function must have a base case.**
-**Subtopic: Recursive Functions**
-**What in that subtopic exactly: Characteristics of Recursive Functions**
+**Correct answer: c. To stop the recursion.**
+**Subtopic: Basics of Recursion**
+**What in that subtopic exactly: Base Case in Recursion**
 **Difficulty: m**
 
 **Question 3**
-What is the term for the process of returning from a recursive function call?
-a. Invocation
-b. Termination
-c. Unwinding
-d. Iteration
+Consider a recursive function that calculates the factorial of a number. What will happen if the base case is not defined?
+a. The function will return 1.
+b. The function will return 0.
+c. The function will go into an infinite loop.
+d. The function will optimize itself.
 
-**Correct answer: c. Unwinding**
-**Subtopic: Recursive Function Calls**
-**What in that subtopic exactly: Recursive Function Call Process**
+**Correct answer: c. The function will go into an infinite loop.**
+**Subtopic: Basics of Recursion**
+**What in that subtopic exactly: Importance of Base Case**
 **Difficulty: m**
 
 **Question 4**
-Which of the following data structures is commonly used to implement backtracking algorithms?
-a. Stacks
-b. Queues
-c. Trees
-d. Graphs
+What is the time complexity of a recursive function that calculates the Fibonacci sequence?
+a. O(n^2)
+b. O(2^n)
+c. O(n log n)
+d. O(n)
 
-**Correct answer: a. Stacks**
-**Subtopic: Backtracking Algorithms**
-**What in that subtopic exactly: Implementing Backtracking Algorithms**
+**Correct answer: b. O(2^n)**
+**Subtopic: Analysis of Recursive Functions**
+**What in that subtopic exactly: Time Complexity of Recursive Functions**
 **Difficulty: h**
 
 **Question 5**
-What is the purpose of the "unchoosing" step in a backtracking algorithm?
-a. To undo the last choice made.
-b. To make a new choice.
-c. To store the solution.
-d. To terminate the algorithm.
+Consider a recursive function that solves the N-Queens problem using backtracking. What is the purpose of backtracking in this context?
+a. To optimize the function.
+b. To find the first solution.
+c. To explore all possible solutions and then backtrack to find the correct one.
+d. To stop the recursion.
 
-**Correct answer: a. To undo the last choice made.**
-**Subtopic: Backtracking Algorithms**
-**What in that subtopic exactly: Unchoosing in Backtracking Algorithms**
+**Correct answer: c. To explore all possible solutions and then backtrack to find the correct one.**
+**Subtopic: Backtracking**
+**What in that subtopic exactly: Purpose of Backtracking in N-Queens Problem**
 **Difficulty: h**

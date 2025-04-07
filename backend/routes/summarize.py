@@ -128,6 +128,49 @@ def generate_summary(content):
     except Exception as e:
         print(f"Error generating summary: {str(e)}")
         return None
+    
+import os
+from utils import extract_number, get_stripped_name
+
+def get_topic_path(chapter_name, topic_name, course):
+    try:
+        # Get the base directory of the current file
+        current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        
+        # Build path to the course content directory
+        content_path = os.path.join(current_dir, '..', 'content', course)
+
+        if not os.path.exists(content_path):
+            raise FileNotFoundError(f"Course directory '{course}' does not exist")
+
+        # Match the appropriate chapter directory by stripped name
+        matched_chapter = None
+        for dir_name in os.listdir(content_path):
+            if os.path.isdir(os.path.join(content_path, dir_name)) and get_stripped_name(dir_name).lower() == chapter_name.lower():
+                matched_chapter = dir_name
+                break 
+
+        if not matched_chapter:
+            raise FileNotFoundError(f"Chapter '{chapter_name}' not found in course '{course}'")
+
+        chapter_path = os.path.join(content_path, matched_chapter)
+
+        # Match the topic file inside the chapter directory
+        matched_topic = None
+        for file_name in os.listdir(chapter_path):
+            if os.path.isfile(os.path.join(chapter_path, file_name)) and get_stripped_name(file_name).lower() == topic_name.lower():
+                matched_topic = file_name
+                break
+
+        if not matched_topic:
+            raise FileNotFoundError(f"Topic '{topic_name}' not found in chapter '{chapter_name}'")
+
+        topic_path = os.path.join(chapter_path, matched_topic)
+        return topic_path
+
+    except Exception as e:
+        print(f"Error in get_topic_path: {e}")
+        return None
 
 @summarize_bp.route('/get-topic-content', methods=['POST'])
 def get_topic_content():
@@ -153,6 +196,9 @@ def get_topic_content():
         user_ref = db.collection('users').document(email)
         user_doc = user_ref.get()
         course = user_doc.to_dict().get('course', 'Unknown Course')
+
+        # topic_path = get_topic_path(chapter_name, topic_name, course)
+        # print(topic_path)
         
         return jsonify({
             "topicContent": enhanced_content,
