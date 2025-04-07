@@ -4,6 +4,7 @@ from groq import Groq
 import os
 import traceback
 from dotenv import load_dotenv
+from utils import get_stripped_name
 
 load_dotenv()
 api_key = os.getenv("GROQ_API_KEY")
@@ -129,8 +130,6 @@ def generate_summary(content):
         print(f"Error generating summary: {str(e)}")
         return None
     
-import os
-from utils import extract_number, get_stripped_name
 
 def get_topic_path(chapter_name, topic_name, course):
     try:
