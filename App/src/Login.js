@@ -25,7 +25,12 @@ const LoginPage = () => {
                 localStorage.setItem("userName", result.user.name); // Store name too
                 localStorage.setItem("userCourse", result.user.course || "Not Set");                
 
-                navigate('/chapters');
+                // Redirect to admin page if email is admin
+                if (result.user.email === "admin@admin") {
+                    navigate('/admin');
+                } else {
+                    navigate('/chapters');
+                }
             } else {
                 setError(result.message || 'Invalid email or password.');
             }

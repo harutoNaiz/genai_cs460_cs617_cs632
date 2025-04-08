@@ -82,3 +82,29 @@ def login():
     
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500
+
+@auth_bp.route('/admin/get-users', methods=['GET'])
+def get_users():
+    try:
+        # Exclude the admin user from the results
+        users_ref = db.collection('users')
+        users_docs = users_ref.where('email', '!=', 'admin@admin').get()
+        
+        users = []
+        for doc in users_docs:
+            user_data = doc.to_dict()
+            # Include all user data including performance_data
+            users.append({
+                'name': user_data.get('name'),
+                'email': user_data.get('email'),
+                'course': user_data.get('course'),
+                'dob': user_data.get('dob'),
+                'rank': user_data.get('rank'),
+                'performance_data': user_data.get('performance_data', {}),
+                'createdAt': user_data.get('createdAt'),
+            })
+        
+        return jsonify({"success": True, "users": users}), 200
+    
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500

@@ -9,6 +9,7 @@ import TestPage from './test'
 import TakeTest from './takeTest'
 import TestResults from './results'
 import ProfilePage from './profile'
+import Admin from './admin'
 
 import './index.css';
 
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/taketest" element={<TakeTest />} />
         <Route path="/test-results" element={<TestResults />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </Router>
   );
