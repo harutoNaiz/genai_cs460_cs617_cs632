@@ -1,36 +1,86 @@
-🚀 AI-Enhanced Adaptive Assessment System
-Tags: #RAG #LLM #FAISS #SemanticSearch #EdTech #Firebase #Microservices #Python #NLP #QuestionGeneration
+<h1 align="center">🎓 AI-Enhanced Adaptive Assessment System</h1>
 
-🧠 Overview
-An AI-driven adaptive assessment platform that leverages Retrieval-Augmented Generation (RAG) and Large Language Models (LLMs) to generate personalized, context-aware quiz questions for computer science education.
+<p align="center">
+  <i>Dynamic, personalized quiz generation using RAG, LLMs, and semantic search</i>
+</p>
 
-🔧 Tech Stack
-Core AI: RAG, Groq LLM, SentenceTransformer
+<p align="center">
+  <strong>Tags:</strong>
+  <code>#RAG</code>
+  <code>#LLM</code>
+  <code>#FAISS</code>
+  <code>#SemanticSearch</code>
+  <code>#EdTech</code>
+  <code>#Firebase</code>
+  <code>#Python</code>
+  <code>#Microservices</code>
+  <code>#QuestionGeneration</code>
+  <code>#NLP</code>
+</p>
 
-Retrieval: FAISS for semantic similarity
+<hr />
 
-Backend: Python Microservices, REST APIs
+<h2>🔍 Overview</h2>
 
-Frontend: React (or HTML/CSS if applicable), Dashboard with real-time results
+<p>
+  This system replaces static STEM quizzes with a smart, adaptive assessment engine that:
+</p>
 
-Authentication: Firebase
+<ul>
+  <li>Uses <strong>Retrieval-Augmented Generation (RAG)</strong> for question creation</li>
+  <li>Incorporates <strong>semantic similarity</strong> to ensure context relevance</li>
+  <li>Supports <strong>curriculum-aligned summaries</strong> and adaptive feedback</li>
+</ul>
 
-Deployment: Modular and scalable architecture
+<hr />
 
-✨ Features
-📚 Curriculum-Aligned Question Generation using curated academic content
+<h2>🛠️ Tech Stack</h2>
 
-🎯 Adaptive Difficulty & Semantic Relevance via FAISS + SentenceTransformer
+<table>
+  <tr>
+    <th>Layer</th>
+    <th>Tools / Frameworks</th>
+  </tr>
+  <tr>
+    <td>AI Engine</td>
+    <td>Groq LLM, SentenceTransformer</td>
+  </tr>
+  <tr>
+    <td>Retrieval</td>
+    <td>FAISS</td>
+  </tr>
+  <tr>
+    <td>Backend</td>
+    <td>Python, REST APIs, Microservices</td>
+  </tr>
+  <tr>
+    <td>Frontend</td>
+    <td>React / HTML5 + CSS3 (SPA/Dashboard)</td>
+  </tr>
+  <tr>
+    <td>Authentication</td>
+    <td>Firebase Auth</td>
+  </tr>
+</table>
 
-📊 Real-Time Scoring & Confidence Feedback
+<hr />
 
-🧩 Chapter-wise Summarization for Revision
+<h2>✨ Key Features</h2>
 
-🔐 Secure Auth & Session Handling with Firebase
+<ul>
+  <li>🧠 <strong>Context-Aware Question Generation</strong> using academic materials</li>
+  <li>🎯 <strong>Adaptive Difficulty</strong> based on real-time proficiency tracking</li>
+  <li>📊 <strong>Confidence Scoring & Instant Feedback</strong> per submission</li>
+  <li>📚 <strong>Topic-wise Summarization</strong> for quick revision</li>
+  <li>🔐 <strong>Secure User Sessions</strong> with Firebase</li>
+</ul>
 
-📈 Impact
-Reduced manual workload for educators
+<hr />
 
-Generated diverse, high-quality assessments automatically
+<h2>📈 Impact</h2>
 
-Enabled data-driven insights into student performance
+<ul>
+  <li>⚡ Reduced educator workload by automating question generation</li>
+  <li>📈 Improved assessment relevance via semantic similarity</li>
+  <li>📉 Lowered test prep time while improving student performance insights</li>
+</ul>
