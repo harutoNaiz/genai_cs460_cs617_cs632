@@ -77,7 +77,7 @@
   </tr>
   <tr>
     <td>Backend</td>
-    <td>Python, REST APIs, Microservices</td>
+    <td>Flask, regex</td>
   </tr>
   <tr>
     <td>Frontend</td>
